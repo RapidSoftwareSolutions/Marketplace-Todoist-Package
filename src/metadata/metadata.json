@@ -1,0 +1,3637 @@
+{
+    "package": "Todoist",
+    "tagline": "Todoist API",
+    "description": "Todoist offers more useful features than any other to do service. So you can do more to customize the experience, organize your tasks and projects, and optimize your productivity.",
+    "image": "https:\/\/logo.clearbit.com\/todoist.com",
+    "repo": "",
+    "keywords": [
+        "API",
+        "Schedule",
+        "Tasks",
+        "Projects",
+        "Time",
+        "Organize"
+    ],
+    "accounts": {
+        "domain": "todoist.com",
+        "credentials": [
+            "clientId",
+            "clientSecret",
+            "apiToken"
+        ]
+    },
+    "events": [
+        {
+            "name": "webhookEvent",
+            "description": "The Todoist Webhooks API allows applications to receive real-time notification (in the form of HTTP POST payload) on the subscribed user events. Notice that once you have a webhook setup, you will start receiving webhook events from all your app users immediately.",
+            "payload": {
+                "event_name": "item:added",
+                "user_id": 1234,
+                "event_data": {
+                    "day_order": -1,
+                    "assigned_by_uid": 1855589,
+                    "is_archived": 0,
+                    "labels": [],
+                    "sync_id": null,
+                    "in_history": 0,
+                    "has_notifications": 0,
+                    "indent": 1,
+                    "checked": 0,
+                    "date_added": "Fri 26 Sep 2014 08:25:05 +0000",
+                    "id": 33511505,
+                    "content": "Task1",
+                    "user_id": 1234,
+                    "due_date_utc": null,
+                    "children": null,
+                    "priority": 1,
+                    "item_order": 1,
+                    "is_deleted": 0,
+                    "responsible_uid": null,
+                    "project_id": 128501470,
+                    "collapsed": 0,
+                    "date_string": ""
+                }
+            },
+            "steps": [
+                "Before you can start receiving webhook event notifications, you must first have your webhook configured at the Todoist App Management Console."
+            ],
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "String",
+                    "info": "Token obtained from the email\/password authentication.",
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "blocks": [
+        {
+            "name": "getAccessToken",
+            "description": "Exchanging authorization codes for access token.",
+            "args": [
+                {
+                    "name": "clientId",
+                    "type": "credentials",
+                    "info": "The unique Client ID of the Todoist application that you registered.",
+                    "required": true
+                },
+                {
+                    "name": "clientSecret",
+                    "type": "credentials",
+                    "info": "The unique Client Secret of the Todoist application that you registered.",
+                    "required": true
+                },
+                {
+                    "name": "code",
+                    "type": "String",
+                    "info": "The unique string code that you obtained in the authorization request.",
+                    "required": true
+                },
+                {
+                    "name": "redirectUri",
+                    "type": "String",
+                    "info": "The URL to which to send the response to this request.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "revokeAccessToken",
+            "description": "Access tokens obtained via OAuth could be revoke.",
+            "args": [
+                {
+                    "name": "clientId",
+                    "type": "credentials",
+                    "info": "The unique Client ID of the Todoist application that you registered.",
+                    "required": true
+                },
+                {
+                    "name": "clientSecret",
+                    "type": "credentials",
+                    "info": "The unique Client Secret of the Todoist application that you registered.",
+                    "required": true
+                },
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "exchangeApiToken",
+            "description": "Tokens obtained via the old email\/password authentication method could be migrated to the new OAuth access token.",
+            "args": [
+                {
+                    "name": "clientId",
+                    "type": "credentials",
+                    "info": "The unique Client ID of the Todoist application that you registered.",
+                    "required": true
+                },
+                {
+                    "name": "clientSecret",
+                    "type": "credentials",
+                    "info": "The unique Client Secret of the Todoist application that you registered.",
+                    "required": true
+                },
+                {
+                    "name": "apiToken",
+                    "type": "String",
+                    "info": "Token obtained from the email\/password authentication.",
+                    "required": true
+                },
+                {
+                    "name": "scope",
+                    "type": "List",
+                    "structure": {
+                        "name": "scope",
+                        "type": "Select",
+                        "options": [
+                            "task:add",
+                            "data:read",
+                            "data:read_write",
+                            "data:delete",
+                            "project:delete"
+                        ],
+                        "info": "Single scope name."
+                    },
+                    "info": "Scopes of the OAuth token. Please refer to the OAuth section for the detailed list of available scopes.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "crossOriginResourceSharing",
+            "description": "All API endpoints not related to the 3 OAuth steps support Cross Origin Resource Sharing (CORS) for requests from any origin.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "Token obtained from the email\/password authentication.",
+                    "required": true
+                },
+                {
+                    "name": "origin",
+                    "type": "String",
+                    "info": "Cross Origin Resource Sharing (CORS) ",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "readResources",
+            "description": "Tokens obtained via the old email\/password authentication method could be migrated to the new OAuth access token.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token.",
+                    "required": true
+                },
+                {
+                    "name": "syncToken",
+                    "type": "String",
+                    "info": "A special string, used to allow the client to perform incremental sync. Pass * to retrieve all active resource data.",
+                    "required": true
+                },
+                {
+                    "name": "resourceTypes",
+                    "type": "List",
+                    "structure": {
+                        "name": "resourceTypes",
+                        "type": "Select",
+                        "options": [
+                            "labels",
+                            "projects",
+                            "items",
+                            "notes",
+                            "filters",
+                            "reminders",
+                            "locations",
+                            "user",
+                            "live_notifications",
+                            "collaborators",
+                            "notification_settings",
+                            "all"
+                        ],
+                        "info": "Single resource type."
+                    },
+                    "info": "Used to specify what resources to fetch from the server.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createProject",
+            "description": "Create project.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "tempId",
+                            "type": "String",
+                            "info": "The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "info": "The name of the project (a string value).",
+                            "required": true
+                        },
+                        {
+                            "name": "color",
+                            "type": "Number",
+                            "info": "The color of the project (a number between 0 and 11, or between 0 and 21 for premium users).",
+                            "required": false
+                        },
+                        {
+                            "name": "indent",
+                            "type": "Select",
+                            "options": [
+                                "1",
+                                "2",
+                                "3",
+                                "4"
+                            ],
+                            "info": "The indent of the item (a number between 1 and 4, where 1 is top-level).",
+                            "required": false
+                        },
+                        {
+                            "name": "itemOrder",
+                            "type": "Number",
+                            "info": "Project\u2019s order in the project list (a number, where the smallest value should place the project at the top).",
+                            "required": false
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateProject",
+            "description": "Update an existing project.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": "The id of the project (could be temp id).",
+                            "required": true
+                        },
+                        {
+                            "name": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "info": "The name of the project (a string value).",
+                            "required": true
+                        },
+                        {
+                            "name": "color",
+                            "type": "Number",
+                            "info": "The color of the project (a number between 0 and 11, or between 0 and 21 for premium users).",
+                            "required": false
+                        },
+                        {
+                            "name": "indent",
+                            "type": "Select",
+                            "options": [
+                                "1",
+                                "2",
+                                "3",
+                                "4"
+                            ],
+                            "info": "The indent of the item (a number between 1 and 4, where 1 is top-level).",
+                            "required": false
+                        },
+                        {
+                            "name": "collapsed",
+                            "type": "Select",
+                            "options": [
+                                "true",
+                                "false"
+                            ],
+                            "info": "Whether the project\u2019s sub-projects are collapsed (where 1 is true and 0 is false).",
+                            "required": false
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteProject",
+            "description": "Delete an existing project.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "ids",
+                    "type": "List",
+                    "structure": {
+                        "name": "singleProjectId",
+                        "type": "String",
+                        "info": "Single project id."
+                    },
+                    "info": "List of the ids of the projects to delete (could be temp ids).",
+                    "required": true
+                },
+                {
+                    "name": "uuid",
+                    "type": "String",
+                    "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "archiveProject",
+            "description": "Archive project and its children.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "ids",
+                    "type": "List",
+                    "structure": {
+                        "name": "singleProjectId",
+                        "type": "String",
+                        "info": "Single project id."
+                    },
+                    "info": "List of the ids of the projects to delete (could be temp ids).",
+                    "required": true
+                },
+                {
+                    "name": "uuid",
+                    "type": "String",
+                    "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "unarchiveProject",
+            "description": "Unarchive project and its children.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "ids",
+                    "type": "List",
+                    "structure": {
+                        "name": "singleProjectId",
+                        "type": "String",
+                        "info": "Single project id."
+                    },
+                    "info": "List of the ids of the projects to delete (could be temp ids).",
+                    "required": true
+                },
+                {
+                    "name": "uuid",
+                    "type": "String",
+                    "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateMultipleOrdersAndIndents",
+            "description": "Update the orders and indents of multiple projects at once.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "uuid",
+                    "type": "String",
+                    "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                    "required": true
+                },
+                {
+                    "name": "idsToOrdersIndents",
+                    "type": "Array",
+                    "info": "A dictionary array, with a project id as key and a two elements list as value: project_id: [item_order, indent]",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "projectId",
+                            "type": "String",
+                            "info": "The id of the project (could be temp id).",
+                            "required": true
+                        },
+                        {
+                            "name": "itemOrder",
+                            "type": "Number",
+                            "info": "Project\u2019s order in the project list (a number, where the smallest value should place the project at the top).",
+                            "required": true
+                        },
+                        {
+                            "name": "indent",
+                            "type": "Select",
+                            "options": [
+                                "1",
+                                "2",
+                                "3",
+                                "4"
+                            ],
+                            "info": "The indent of the item (a number between 1 and 4, where 1 is top-level).",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createItem",
+            "description": "Add a new task to a project.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "tempId",
+                            "type": "String",
+                            "info": "The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "content",
+                            "type": "String",
+                            "info": "The text of the task.",
+                            "required": true
+                        },
+                        {
+                            "name": "projectId",
+                            "type": "String",
+                            "info": "The id of the project to add the task to (a number or a temp id). By default the task is added to the user\u2019s Inbox project.",
+                            "required": false
+                        },
+                        {
+                            "name": "dateString",
+                            "type": "String",
+                            "info": "The date of the task, added in free form text, for example it can be every day @ 10 (or null or an empty string to unset).",
+                            "required": false
+                        },
+                        {
+                            "name": "dateLang",
+                            "type": "Select",
+                            "options": [
+                                "en",
+                                "da",
+                                "pl",
+                                "zh",
+                                "ko",
+                                "de",
+                                "pt",
+                                "ja",
+                                "it",
+                                "fr",
+                                "sv",
+                                "ru",
+                                "es",
+                                "nl"
+                            ],
+                            "info": "The language of the dateString.",
+                            "required": false
+                        },
+                        {
+                            "name": "dueDateUtc",
+                            "type": "DatePicker",
+                            "info": "Note that, when the dueDateUtc argument is specified, the date_string is required and has to specified as well, and also, the date_string argument will be parsed as local timestamp, and converted to UTC internally, according to the user\u2019s profile settings.",
+                            "required": false
+                        },
+                        {
+                            "name": "priority",
+                            "type": "Select",
+                            "options": [
+                                "1",
+                                "2",
+                                "3",
+                                "4"
+                            ],
+                            "info": "The priority of the task (a number between 1 and 4, 4 for very urgent and 1 for natural).",
+                            "required": false
+                        },
+                        {
+                            "name": "indent",
+                            "type": "Select",
+                            "options": [
+                                "1",
+                                "2",
+                                "3",
+                                "4"
+                            ],
+                            "info": "The indent of the task (a number between 1 and 4, where 1 is top-level).",
+                            "required": false
+                        },
+                        {
+                            "name": "itemOrder",
+                            "type": "Number",
+                            "info": "The order of the task inside a project (a number, where the smallest value would place the task at the top).",
+                            "required": false
+                        },
+                        {
+                            "name": "dayOrder",
+                            "type": "String",
+                            "info": "The order of the task inside the Today or Next 7 days view (a number, where the smallest value would place the task at the top).",
+                            "required": false
+                        },
+                        {
+                            "name": "collapsed",
+                            "type": "Select",
+                            "options": [
+                                "true",
+                                "false"
+                            ],
+                            "info": "Whether the task\u2019s sub-tasks are collapsed (where 1 is true and 0 is false).",
+                            "required": false
+                        },
+                        {
+                            "name": "labels",
+                            "type": "List",
+                            "structure": {
+                                "name": "singleLabelId",
+                                "type": "String",
+                                "info": "Single label id."
+                            },
+                            "info": "The tasks labels (a list of label).",
+                            "required": false
+                        },
+                        {
+                            "name": "assignedByUid",
+                            "type": "Number",
+                            "info": "The id of user who assigns the current task. This makes sense for shared projects only.",
+                            "required": false
+                        },
+                        {
+                            "name": "responsibleUid",
+                            "type": "Number",
+                            "info": "The id of user who is responsible for accomplishing the current task. This makes sense for shared projects only. ",
+                            "required": false
+                        },
+                        {
+                            "name": "autoReminder",
+                            "type": "Select",
+                            "options": [
+                                "true",
+                                "false"
+                            ],
+                            "info": "When this option is enabled, the default reminder will be added to the new item if it has a due date with time set.",
+                            "required": false
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateItem",
+            "description": "Updates an item for the user related to the API credentials.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": " The id of the task.",
+                            "required": true
+                        },
+                        {
+                            "name": "content",
+                            "type": "String",
+                            "info": "The text of the task.",
+                            "required": false
+                        },
+                        {
+                            "name": "projectId",
+                            "type": "String",
+                            "info": "The id of the project to add the task to (a number or a temp id). By default the task is added to the user\u2019s Inbox project.",
+                            "required": false
+                        },
+                        {
+                            "name": "dateString",
+                            "type": "String",
+                            "info": "The date of the task, added in free form text, for example it can be every day @ 10 (or null or an empty string to unset).",
+                            "required": false
+                        },
+                        {
+                            "name": "dateLang",
+                            "type": "Select",
+                            "options": [
+                                "en",
+                                "da",
+                                "pl",
+                                "zh",
+                                "ko",
+                                "de",
+                                "pt",
+                                "ja",
+                                "it",
+                                "fr",
+                                "sv",
+                                "ru",
+                                "es",
+                                "nl"
+                            ],
+                            "info": "The language of the dateString.",
+                            "required": false
+                        },
+                        {
+                            "name": "dueDateUtc",
+                            "type": "DatePicker",
+                            "info": "Note that, when the dueDateUtc argument is specified, the date_string is required and has to specified as well, and also, the date_string argument will be parsed as local timestamp, and converted to UTC internally, according to the user\u2019s profile settings.",
+                            "required": false
+                        },
+                        {
+                            "name": "priority",
+                            "type": "Select",
+                            "options": [
+                                "1",
+                                "2",
+                                "3",
+                                "4"
+                            ],
+                            "info": "The priority of the task (a number between 1 and 4, 4 for very urgent and 1 for natural).",
+                            "required": false
+                        },
+                        {
+                            "name": "indent",
+                            "type": "Select",
+                            "options": [
+                                "1",
+                                "2",
+                                "3",
+                                "4"
+                            ],
+                            "info": "The indent of the task (a number between 1 and 4, where 1 is top-level).",
+                            "required": false
+                        },
+                        {
+                            "name": "itemOrder",
+                            "type": "Number",
+                            "info": "The order of the task inside a project (a number, where the smallest value would place the task at the top).",
+                            "required": false
+                        },
+                        {
+                            "name": "dayOrder",
+                            "type": "String",
+                            "info": "The order of the task inside the Today or Next 7 days view (a number, where the smallest value would place the task at the top).",
+                            "required": false
+                        },
+                        {
+                            "name": "collapsed",
+                            "type": "Select",
+                            "options": [
+                                "true",
+                                "false"
+                            ],
+                            "info": "Whether the task\u2019s sub-tasks are collapsed (where 1 is true and 0 is false).",
+                            "required": false
+                        },
+                        {
+                            "name": "labels",
+                            "type": "List",
+                            "structure": {
+                                "name": "singleLabelId",
+                                "type": "String",
+                                "info": "Single label id."
+                            },
+                            "info": "The tasks labels (a list of label).",
+                            "required": false
+                        },
+                        {
+                            "name": "assignedByUid",
+                            "type": "Number",
+                            "info": "The id of user who assigns the current task. This makes sense for shared projects only.",
+                            "required": false
+                        },
+                        {
+                            "name": "responsibleUid",
+                            "type": "Number",
+                            "info": "The id of user who is responsible for accomplishing the current task. This makes sense for shared projects only. ",
+                            "required": false
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteItem",
+            "description": "Delete an existing task.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "uuid",
+                    "type": "String",
+                    "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                    "required": true
+                },
+                {
+                    "name": "itemIds",
+                    "type": "List",
+                    "structure": {
+                        "name": "singleProjectId",
+                        "type": "String",
+                        "info": "Single project id."
+                    },
+                    "info": "List of the ids of the projects to delete (could be temp ids).",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "moveItem",
+            "description": "Move a task from one project to another project.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "projectItems",
+                            "type": "JSON",
+                            "info": "A JSON mapping telling Todoist where the items are currently found. From project ids to item ids, for example {`1523`:[`9637423`]}, where 1523 is the project id and 9637423 is the item id.",
+                            "required": true
+                        },
+                        {
+                            "name": "toProject",
+                            "type": "Number",
+                            "info": "The project id that the tasks should be moved to, for example 1245.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "completeItems",
+            "description": "Complete tasks and optionally move them to history. See also itemClose for a simplified version of the command.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "uuid",
+                    "type": "String",
+                    "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                    "required": true
+                },
+                {
+                    "name": "itemIds",
+                    "type": "List",
+                    "structure": {
+                        "name": "singleItemId",
+                        "type": "String",
+                        "info": "Single item id (complete)."
+                    },
+                    "info": "A list of ids to complete (numbers or temp ids).",
+                    "required": true
+                },
+                {
+                    "name": "forceHistory",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Whether these tasks should be moved to history (where 1 is true and 0 is false, and the default is 1) This is useful when checking off sub tasks.",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "uncompleteItems",
+            "description": "Uncomplete tasks and move them to the active projects.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "uuid",
+                    "type": "String",
+                    "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                    "required": true
+                },
+                {
+                    "name": "itemIds",
+                    "type": "List",
+                    "structure": {
+                        "name": "singleItemId",
+                        "type": "String",
+                        "info": "Single item id (complete)."
+                    },
+                    "info": "A list of items to uncomplete.",
+                    "required": true
+                },
+                {
+                    "name": "restoreState",
+                    "type": "JSON",
+                    "info": "A dictionary object, where the item id is the key, and its value is a list of four elements, whether the item is in history, whether it is checked, its order and indent - item_id: [in_history, checked, item_order, indent].",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "completeRecurringTask",
+            "description": "Complete a recurring task, and the reason why this is a special case is because we need to mark a recurring completion (and using itemUpdate won\u2019t do this). See also item_close for a simplified version of the command.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "newDateUtc",
+                            "type": "DatePicker",
+                            "info": "Note that, when the new_date_utc argument is specified, the date_string is required and has to specified as well, and also, the date_string argument will be parsed as local timestamp, and converted to UTC internally, according to the user\u2019s profile settings.",
+                            "required": false
+                        },
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": "The id of the item to update (a number or a temp id).",
+                            "required": false
+                        },
+                        {
+                            "name": "dateString",
+                            "type": "String",
+                            "info": "The date of the task, added in free form text, for example it can be every day @ 10 (or null or an empty string to unset). ",
+                            "required": false
+                        },
+                        {
+                            "name": "isForward",
+                            "type": "Select",
+                            "options": [
+                                "true",
+                                "false"
+                            ],
+                            "info": "Whether the task is to be completed (value 1) or uncompleted (value 0), while the default is 1.",
+                            "required": false
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "closeItem",
+            "description": "A simplified version of itemComplete . The command does exactly what official clients do when you close a task: regular task is completed and moved to history, subtask is checked (marked as done, but not moved to history), recurring task is moved forward (due date is updated).",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": "The id of the item to close (a number or a temp id).",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateDayOrders",
+            "description": "Update the day orders of multiple items at once.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "itemId",
+                            "type": "String",
+                            "info": "The item which the note is part of (a unique number or temp id).",
+                            "required": true
+                        },
+                        {
+                            "name": "dayOrder",
+                            "type": "String",
+                            "info": "The order of the task inside the Today or Next 7 days view (a number, where the smallest value would place the task at the top).",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createLabel",
+            "description": "Create a label.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "tempId",
+                            "type": "String",
+                            "info": "The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "info": "The name of the label.",
+                            "required": true
+                        },
+                        {
+                            "name": "color",
+                            "type": "Number",
+                            "info": "The color of the label (a number between 0 and 7, or between 0 and 12 for premium users).",
+                            "required": false
+                        },
+                        {
+                            "name": "itemOrder",
+                            "type": "Number",
+                            "info": "Label\u2019s order in the label list (a number, where the smallest value should place the label at the top).",
+                            "required": false
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateLabel",
+            "description": "Update a label.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": "The id of the label.",
+                            "required": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "info": "The name of the label.",
+                            "required": false
+                        },
+                        {
+                            "name": "color",
+                            "type": "Number",
+                            "info": "The color of the label (a number between 0 and 7, or between 0 and 12 for premium users).",
+                            "required": false
+                        },
+                        {
+                            "name": "itemOrder",
+                            "type": "Number",
+                            "info": "Label\u2019s order in the label list (a number, where the smallest value should place the label at the top).",
+                            "required": false
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteLabel",
+            "description": "Update a label.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": "The id of the label.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateMultipleOrders",
+            "description": "A dictionary, where a label id is the key, and the order its value: labelId : order.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "uuid",
+                    "type": "String",
+                    "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                    "required": true
+                },
+                {
+                    "name": "idOrderMapping",
+                    "type": "Array",
+                    "info": "A dictionary, where a label id is the key, and the order its value: label_id: order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "order",
+                            "type": "Number",
+                            "info": "Order number.",
+                            "required": true
+                        },
+                        {
+                            "name": "labelId",
+                            "type": "String",
+                            "info": "Single label id.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createNote",
+            "description": "Add a note.Is only available for Todoist Premium.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "tempId",
+                            "type": "String",
+                            "info": "The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "itemId",
+                            "type": "String",
+                            "info": "The item which the note is part of (a unique number or temp id).",
+                            "required": true
+                        },
+                        {
+                            "name": "content",
+                            "type": "String",
+                            "info": "The content of the note.",
+                            "required": true
+                        },
+                        {
+                            "name": "fileAttachment",
+                            "type": "File",
+                            "info": "A file attached to the note.",
+                            "required": false
+                        },
+                        {
+                            "name": "uidsToNotify",
+                            "type": "List",
+                            "structure": {
+                                "name": "userId",
+                                "type": "Number",
+                                "info": "Single user id."
+                            },
+                            "info": "A list of user ids to notify.",
+                            "required": false
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createProjectNote",
+            "description": "Add a project note.Is only available for Todoist Premium.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "projectId",
+                            "type": "String",
+                            "info": "The project which the note is part of.",
+                            "required": true
+                        },
+                        {
+                            "name": "content",
+                            "type": "String",
+                            "info": "The content of the note.",
+                            "required": true
+                        },
+                        {
+                            "name": "fileAttachment",
+                            "type": "File",
+                            "info": "A file attached to the note.",
+                            "required": false
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateNote",
+            "description": "Update a note.Is only available for Todoist Premium.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": "The id of the note.",
+                            "required": true
+                        },
+                        {
+                            "name": "content",
+                            "type": "String",
+                            "info": "The content of the note.",
+                            "required": true
+                        },
+                        {
+                            "name": "fileAttachment",
+                            "type": "File",
+                            "info": "A file attached to the note.",
+                            "required": false
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteNote",
+            "description": "Delete a note.Is only available for Todoist Premium.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": "The id of the note.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createFilter",
+            "description": "Add a filter.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "tempId",
+                            "type": "String",
+                            "info": "The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "query",
+                            "type": "String",
+                            "info": "The query to search for.",
+                            "required": true
+                        },
+                        {
+                            "name": "color",
+                            "type": "Number",
+                            "info": "The color of the filter (between 0 and 7, or between 0 and 12 for premium users).",
+                            "required": false
+                        },
+                        {
+                            "name": "itemOrder",
+                            "type": "Number",
+                            "info": "Filter\u2019s order in the filter list (the smallest value should place the filter at the top).",
+                            "required": false
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateFilter",
+            "description": "Update a filter.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": "The id of the filter.",
+                            "required": true
+                        },
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "info": "The name of the filter.",
+                            "required": false
+                        },
+                        {
+                            "name": "query",
+                            "type": "String",
+                            "info": "The query to search for.",
+                            "required": false
+                        },
+                        {
+                            "name": "color",
+                            "type": "Number",
+                            "info": "The color of the filter (between 0 and 7, or between 0 and 12 for premium users).",
+                            "required": false
+                        },
+                        {
+                            "name": "itemOrder",
+                            "type": "Number",
+                            "info": "Filter\u2019s order in the filter list (the smallest value should place the filter at the top).",
+                            "required": false
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteFilter",
+            "description": "Delete a filter.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": "The id of the filter.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createReminder",
+            "description": "Add a new reminder to the user account related to the API credentials.Is only available for Todoist Premium.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "tempId",
+                            "type": "String",
+                            "info": "The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "itemId",
+                            "type": "String",
+                            "info": "The item id for which the reminder is about.",
+                            "required": true
+                        },
+                        {
+                            "name": "notifyUid",
+                            "type": "Number",
+                            "info": "The user id which should be notified of the reminder, typically the current user id creating the reminder.",
+                            "required": false
+                        },
+                        {
+                            "name": "service",
+                            "type": "Select",
+                            "options": [
+                                "email",
+                                "mobile",
+                                "push"
+                            ],
+                            "info": "The way to get notified of the reminder: email for e-mail, mobile for mobile text message, or push for mobile push notification.",
+                            "required": false
+                        },
+                        {
+                            "name": "type",
+                            "type": "Select",
+                            "options": [
+                                "relative",
+                                "absolute",
+                                "location"
+                            ],
+                            "info": "The type of the reminder: relative for a time-based reminder specified in minutes from now, absolute for a time-based reminder with a specific time and date in the future, and location for a location-based reminder.",
+                            "required": false
+                        },
+                        {
+                            "name": "dateString",
+                            "type": "String",
+                            "info": "The date of the reminder, added in free form text, for example it can be every day @ 10 (or null or an empty string to unset).",
+                            "required": false
+                        },
+                        {
+                            "name": "dateLang",
+                            "type": "Select",
+                            "options": [
+                                "en",
+                                "da",
+                                "pl",
+                                "zh",
+                                "ko",
+                                "de",
+                                "pt",
+                                "ja",
+                                "it",
+                                "fr",
+                                "sv",
+                                "ru",
+                                "es",
+                                "nl"
+                            ],
+                            "info": "The language of the dateString.",
+                            "required": false
+                        },
+                        {
+                            "name": "dueDateUtc",
+                            "type": "DatePicker",
+                            "info": "Note that, when the due_date_utc argument is specified, the date_string is required and has to specified as well, and also, the date_string argument will be parsed as local timestamp, and converted to UTC internally, according to the user\u2019s profile settings.",
+                            "required": false
+                        },
+                        {
+                            "name": "minuteOffset",
+                            "type": "Number",
+                            "info": "The relative time in minutes before the due date of the item, in which the reminder should be triggered. Note, that the item should have a due date set in order to add a relative reminder.",
+                            "required": false
+                        },
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "info": "An alias name for the location.",
+                            "required": false
+                        },
+                        {
+                            "name": "coordinates",
+                            "type": "map",
+                            "info": "Location coordinates.",
+                            "required": false
+                        },
+                        {
+                            "name": "locTrigger",
+                            "type": "String",
+                            "info": "What should trigger the reminder: on_enter for entering the location, or on_leave for leaving the location.",
+                            "required": false
+                        },
+                        {
+                            "name": "radius",
+                            "type": "Number",
+                            "info": "The radius around the location that is still considered as part of the location (in meters).",
+                            "required": false
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateReminder",
+            "description": "Update a reminder from the user account related to the API credentials.Is only available for Todoist Premium.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": "The id of the reminder.",
+                            "required": true
+                        },
+                        {
+                            "name": "notifyUid",
+                            "type": "Number",
+                            "info": "The user id which should be notified of the reminder, typically the current user id creating the reminder.",
+                            "required": false
+                        },
+                        {
+                            "name": "service",
+                            "type": "Select",
+                            "options": [
+                                "email",
+                                "mobile",
+                                "push"
+                            ],
+                            "info": "The way to get notified of the reminder: email for e-mail, mobile for mobile text message, or push for mobile push notification.",
+                            "required": false
+                        },
+                        {
+                            "name": "type",
+                            "type": "String",
+                            "info": "The type of the reminder: relative for a time-based reminder specified in minutes from now, absolute for a time-based reminder with a specific time and date in the future, and location for a location-based reminder.",
+                            "required": false
+                        },
+                        {
+                            "name": "dateString",
+                            "type": "String",
+                            "info": "The date of the reminder, added in free form text, for example it can be every day @ 10 (or null or an empty string to unset).",
+                            "required": false
+                        },
+                        {
+                            "name": "dateLang",
+                            "type": "Select",
+                            "options": [
+                                "en",
+                                "da",
+                                "pl",
+                                "zh",
+                                "ko",
+                                "de",
+                                "pt",
+                                "ja",
+                                "it",
+                                "fr",
+                                "sv",
+                                "ru",
+                                "es",
+                                "nl"
+                            ],
+                            "info": "The language of the dateString.",
+                            "required": false
+                        },
+                        {
+                            "name": "dueDateUtc",
+                            "type": "DatePicker",
+                            "info": "Note that, when the due_date_utc argument is specified, the date_string is required and has to specified as well, and also, the date_string argument will be parsed as local timestamp, and converted to UTC internally, according to the user\u2019s profile settings.",
+                            "required": false
+                        },
+                        {
+                            "name": "minuteOffset",
+                            "type": "Number",
+                            "info": "The relative time in minutes before the due date of the item, in which the reminder should be triggered. Note, that the item should have a due date set in order to add a relative reminder.",
+                            "required": false
+                        },
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "info": "An alias name for the location.",
+                            "required": false
+                        },
+                        {
+                            "name": "coordinates",
+                            "type": "map",
+                            "info": "Location coordinates.",
+                            "required": false
+                        },
+                        {
+                            "name": "locTrigger",
+                            "type": "String",
+                            "info": "What should trigger the reminder: on_enter for entering the location, or on_leave for leaving the location.",
+                            "required": false
+                        },
+                        {
+                            "name": "radius",
+                            "type": "Number",
+                            "info": "The radius around the location that is still considered as part of the location (in meters).",
+                            "required": false
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteReminder",
+            "description": "Delete a reminder from the user account related to the API credentials.Is only available for Todoist Premium.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "id",
+                            "type": "String",
+                            "info": "The id of the reminder.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "clearLocations",
+            "description": "Clears the locations list, which is used for the location reminders.Is only available for Todoist Premium.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getProductivityStats",
+            "description": "Get the user\u2019s productivity stats.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAllCompletedItems",
+            "description": "Only available for Todoist Premium users.Get all the user\u2019s completed items (tasks).Is only available for Todoist Premium.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "projectId",
+                    "type": "Number",
+                    "info": "Filter the tasks by project id.",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "The number of items to return (where the default is 30, and the maximum is 50).",
+                    "required": false
+                },
+                {
+                    "name": "offset",
+                    "type": "Number",
+                    "info": "Can be used for pagination, when more than the limit number of tasks are returned.",
+                    "required": false
+                },
+                {
+                    "name": "until",
+                    "type": "DatePicker",
+                    "info": "Return items with a completed date same or older than until (a string value formatted as 2007-4-29T10:13).",
+                    "required": false
+                },
+                {
+                    "name": "since",
+                    "type": "DatePicker",
+                    "info": "Return items with a completed date newer than since (a string value formatted as 2007-4-29T10:13).",
+                    "required": false
+                },
+                {
+                    "name": "annotateNotes",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Return notes together with the completed items (a true or false value).",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getArchivedProjects",
+            "description": "Get the user\u2019s archived projects.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getItemInfo",
+            "description": "This function is used to extract detailed information about the item, including all the notes.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "itemId",
+                    "type": "Number",
+                    "info": "The item\u2019s unique id.",
+                    "required": true
+                },
+                {
+                    "name": "allData",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Whether to return the parent project and notes of the item (a true or false value, while the default is true).",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getProjectInfo",
+            "description": "This function is used to extract detailed information about the project, including all the note",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "projectId",
+                    "type": "Number",
+                    "info": "The project\u2019s unique id.",
+                    "required": true
+                },
+                {
+                    "name": "allData",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Whether to return the parent project and notes of the item (a true or false value, while the default is true).",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getProjectData",
+            "description": "Get a project\u2019s uncompleted items.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "projectId",
+                    "type": "Number",
+                    "info": "The project\u2019s unique id.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "quickAddTask",
+            "description": "Add a new task using the Quick Add Task implementation available in the official clients.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "text",
+                    "type": "String",
+                    "info": "The text of the task that is parsed. It can include a due date in free form text, a project name starting with the # character, a label starting with the @ character, and an assignee starting with the + character.",
+                    "required": true
+                },
+                {
+                    "name": "note",
+                    "type": "String",
+                    "info": "The content of the note.",
+                    "required": false
+                },
+                {
+                    "name": "reminder",
+                    "type": "DatePicker",
+                    "info": "The date of the reminder, added in free form text.",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "registerNewUser",
+            "description": "Register a new user.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "email",
+                    "type": "String",
+                    "info": "The user\u2019s email.",
+                    "required": true
+                },
+                {
+                    "name": "fullName",
+                    "type": "String",
+                    "info": "The user\u2019s real name formatted as Firstname Lastname.",
+                    "required": true
+                },
+                {
+                    "name": "password",
+                    "type": "String",
+                    "info": "The user\u2019s password.",
+                    "required": true
+                },
+                {
+                    "name": "lang",
+                    "type": "Select",
+                    "options": [
+                        "en",
+                        "da",
+                        "pl",
+                        "zh",
+                        "ko",
+                        "de",
+                        "pt",
+                        "ja",
+                        "it",
+                        "fr",
+                        "sv",
+                        "ru",
+                        "es",
+                        "nl"
+                    ],
+                    "info": "The user\u2019s language.",
+                    "required": false
+                },
+                {
+                    "name": "timezone",
+                    "type": "String",
+                    "info": "The user\u2019s timezone (a string value such as UTC, Europe\/Lisbon, US\/Eastern, Asian\/Taipei). By default we use the user\u2019s IP address to determine the timezone.",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateUsersProperties",
+            "description": "Update user\u2019s properties",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "tempId",
+                            "type": "String",
+                            "info": "The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "email",
+                            "type": "String",
+                            "info": "The user\u2019s email.",
+                            "required": true
+                        },
+                        {
+                            "name": "fullName",
+                            "type": "String",
+                            "info": "The user\u2019s real name formatted as Firstname Lastname.",
+                            "required": false
+                        },
+                        {
+                            "name": "password",
+                            "type": "String",
+                            "info": "The user\u2019s password.",
+                            "required": false
+                        },
+                        {
+                            "name": "timezone",
+                            "type": "String",
+                            "info": "The user\u2019s timezone (a string value such as UTC, Europe\/Lisbon, US\/Eastern, Asian\/Taipei). By default we use the user\u2019s IP address to determine the timezone.",
+                            "required": false
+                        },
+                        {
+                            "name": "startPage",
+                            "type": "String",
+                            "info": "The user\u2019s default view on Todoist. The start page can be one of the following: _info_page for the info page, _blank for a blank page, _project_<PROJECT_ID> for project with id <PROJECT_ID>, and <ANY_QUERY> to query after anything.",
+                            "required": false
+                        },
+                        {
+                            "name": "startDay",
+                            "type": "Number",
+                            "info": "The first day of the week (between 1 and 7, where 1 is Monday and 7 is Sunday).",
+                            "required": false
+                        },
+                        {
+                            "name": "nextWeek",
+                            "type": "Number",
+                            "info": "The day of the next week, that tasks will be postponed to (between 1 and 7, where 1 is Monday and 7 is Sunday).",
+                            "required": false
+                        },
+                        {
+                            "name": "timeFormat",
+                            "type": "Number",
+                            "info": "Whether to use a 24h format such as 13:00 (if set to 0) when displaying time, or a 12h format such as 1:00pm (if set to 1).",
+                            "required": false
+                        },
+                        {
+                            "name": "timeFormat",
+                            "type": "Number",
+                            "info": "Whether to use a 24h format such as 13:00 (if set to 0) when displaying time, or a 12h format such as 1:00pm (if set to 1).",
+                            "required": false
+                        },
+                        {
+                            "name": "dateFormat",
+                            "type": "Select",
+                            "options": [
+                                "DD-MM-YYYY",
+                                "MM-DD-YYYY"
+                            ],
+                            "info": "Whether to use the DD-MM-YYYY date format (if set to 0), or the MM-DD-YYYY format (if set to 1).",
+                            "required": false
+                        },
+                        {
+                            "name": "sortOrder",
+                            "type": "Select",
+                            "options": [
+                                "oldestDatesFirst",
+                                "oldestDatesLast"
+                            ],
+                            "info": "Whether to show projects in an oldest dates first order (if set to 0, or a oldest dates last order (if set to 1).",
+                            "required": false
+                        },
+                        {
+                            "name": "defaultReminder",
+                            "type": "String",
+                            "info": "The default reminder for the user.",
+                            "required": false
+                        },
+                        {
+                            "name": "autoReminder",
+                            "type": "Number",
+                            "info": "The default time in minutes for the automatic reminders set, whenever a due date has been specified for a task.",
+                            "required": false
+                        },
+                        {
+                            "name": "mobileNumber",
+                            "type": "Number",
+                            "info": "The default time in minutes for the automatic reminders set, whenever a due date has been specified for a task.",
+                            "required": false
+                        },
+                        {
+                            "name": "mobileHost",
+                            "type": "String",
+                            "info": "The user\u2019s mobile host (or null if not set).",
+                            "required": false
+                        },
+                        {
+                            "name": "theme",
+                            "type": "String",
+                            "info": "The currently selected Todoist theme (between 0 and 10).",
+                            "required": false
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateKarmaGoals",
+            "description": "Update the karma goals of the user.Is only available for Todoist Premium.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "dailyGoal",
+                            "type": "Number",
+                            "info": "The target number of tasks to complete per day.",
+                            "required": true
+                        },
+                        {
+                            "name": "weeklyGoal",
+                            "type": "Number",
+                            "info": "The target number of tasks to complete per week.",
+                            "required": false
+                        },
+                        {
+                            "name": "ignoreDays",
+                            "type": "Number",
+                            "info": "list with the days of the week to ignore (1 for Monday and 7 for Sunday).",
+                            "required": false
+                        },
+                        {
+                            "name": "vacationMode",
+                            "type": "Select",
+                            "options": [
+                                "true",
+                                "false"
+                            ],
+                            "info": "Marks the user as being on vacation (where 1 is true and 0 is false).",
+                            "required": false
+                        },
+                        {
+                            "name": "karmaDisabled",
+                            "type": "Select",
+                            "options": [
+                                "true",
+                                "false"
+                            ],
+                            "info": "Whether to disable the karma and goals measuring altogether (where 1 is true and 0 is false).",
+                            "required": false
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateNotificationSettings",
+            "description": "Update the user\u2019s notification settings.Is only available for Todoist Premium.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "notificationType",
+                    "type": "List",
+                    "structure": {
+                        "name": "notificationType",
+                        "type": "Select",
+                        "options": [
+                            "shareInvitationSent",
+                            "shareInvitationAccepted",
+                            "shareInvitationRejected",
+                            "userLeftProject",
+                            "userRemovedFromProject",
+                            "itemAssigned",
+                            "itemCompleted",
+                            "itemUncompleted",
+                            "noteAdded",
+                            "bizPolicyDisallowedInvitation",
+                            "bizPolicyRejectedInvitation",
+                            "bizTrialWillEnd",
+                            "bizPaymentFailed",
+                            "bizAccountDisabled",
+                            "bizInvitationCreated",
+                            "bizInvitationAccepted",
+                            "bizInvitationRejected"
+                        ],
+                        "info": "Single notification type."
+                    },
+                    "info": "The notification type.",
+                    "required": true
+                },
+                {
+                    "name": "service",
+                    "type": "Select",
+                    "options": [
+                        "email",
+                        "push",
+                        "mobile"
+                    ],
+                    "info": "The service type, which can take the values: email or push.",
+                    "required": true
+                },
+                {
+                    "name": "dontNotify",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Whether notifications of this service should be notified (1 to not notify, and 0 to notify).",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "shareProject",
+            "description": "Share a project with another user.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "projectId",
+                            "type": "String",
+                            "info": "The project to be shared.",
+                            "required": true
+                        },
+                        {
+                            "name": "email",
+                            "type": "String",
+                            "info": "The user email with whom to share the project.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteCollaborator",
+            "description": "Share a project with another user.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "projectId",
+                            "type": "String",
+                            "info": "The project to be shared.",
+                            "required": true
+                        },
+                        {
+                            "name": "email",
+                            "type": "String",
+                            "info": "The user email with whom to share the project.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "acceptInvitation",
+            "description": "Accept an invitation to join a shared project.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "invitationId",
+                            "type": "Number",
+                            "info": "The invitation id.",
+                            "required": true
+                        },
+                        {
+                            "name": "invitationSecret",
+                            "type": "String",
+                            "info": "The secret fetched from the live notification.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "rejectInvitation",
+            "description": "Reject an invitation to join a shared project.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "invitationId",
+                            "type": "Number",
+                            "info": "The invitation id.",
+                            "required": true
+                        },
+                        {
+                            "name": "invitationSecret",
+                            "type": "String",
+                            "info": "The secret fetched from the live notification.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteInvitation",
+            "description": "Delete an invitation to join a shared project.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "invitationId",
+                            "type": "Number",
+                            "info": "The invitation id.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "setLastKnown",
+            "description": "Set the last known notification.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "id",
+                            "type": "Number",
+                            "info": "The id of the last known notification (a number or 0 or null to mark all read).",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "markAsRead",
+            "description": "Mark the notification as read.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "id",
+                            "type": "Number",
+                            "info": "The id of the notification.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "markAllAsRead",
+            "description": "Mark all notifications as read.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "markAsUnread",
+            "description": "Mark the notification as unread.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "Array",
+                    "info": "Array of Command object. Each command will be processed in the specified order.",
+                    "required": true,
+                    "structure": [
+                        {
+                            "name": "uuid",
+                            "vendorName": "uuid",
+                            "type": "String",
+                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                            "required": true
+                        },
+                        {
+                            "name": "id",
+                            "type": "Number",
+                            "info": "The id of the notification.",
+                            "required": true
+                        }
+                    ]
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "sendInvitation",
+            "description": "This function allows you to send invitation to your business account. Every invitation object has an unique id and secret code.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "emailList",
+                    "type": "List",
+                    "structure": {
+                        "name": "emailList",
+                        "type": "String",
+                        "info": "Single email."
+                    },
+                    "info": "The emails of users which will be invited.",
+                    "required": true
+                },
+                {
+                    "name": "message",
+                    "type": "String",
+                    "info": "Additional text which will be included to invitation welcome message.",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "acceptBusinessInvitation",
+            "description": "This function allows you to send invitation to your business account. Every invitation object has an unique id and secret code.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "id",
+                    "type": "Number",
+                    "info": "The invitation id (a number).",
+                    "required": true
+                },
+                {
+                    "name": "secret",
+                    "type": "String",
+                    "info": "The secret fetched from the live notification (a string value).",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "rejectBusinessInvitation",
+            "description": "The invitation is rejected and deleted. Note that the client doesn\u2019t have to provide the user\u2019s token to reject invitation: it\u2019s enough to provide knowledge of invitation secret business account yet.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "invitationId",
+                    "type": "Number",
+                    "info": "The invitation id (a number).",
+                    "required": true
+                },
+                {
+                    "name": "secret",
+                    "type": "String",
+                    "info": "The secret fetched from the live notification (a string value).",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getActivityLogs",
+            "description": "Get activity logs.Is only available for Todoist Premium.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "objectType",
+                    "type": "String",
+                    "info": "Filters events by a specific object type.",
+                    "required": false
+                },
+                {
+                    "name": "objectId",
+                    "type": "Number",
+                    "info": "Filters events by a specific object id, but only if the objectType has been also specified.",
+                    "required": false
+                },
+                {
+                    "name": "eventType",
+                    "type": "String",
+                    "info": "Filters events by a specific event type.",
+                    "required": false
+                },
+                {
+                    "name": "objectEventTypes",
+                    "type": "String",
+                    "info": "An alternative way to filter by multiple object and event types. This takes a list of strings of the form [object_type]:[event_type] (where either object_type part or the event_type part can be omitted), such as for example [`item:`, `note:added`]. When this parameter is specified the object_type, event_type and object_id parameters are ignored.",
+                    "required": false
+                },
+                {
+                    "name": "parentProjectId",
+                    "type": "Number",
+                    "info": "Filters object events by the id of the project they belong to, so this implicitly limits the results to items and notes.",
+                    "required": false
+                },
+                {
+                    "name": "parentItemId",
+                    "type": "Number",
+                    "info": "Filters object events by the id of the project they belong to, so this implicitly limits the results to items and notes.",
+                    "required": false
+                },
+                {
+                    "name": "initiatorId",
+                    "type": "Number",
+                    "info": "Filters event by the id of the initiator.",
+                    "required": false
+                },
+                {
+                    "name": "since",
+                    "type": "DatePicker",
+                    "info": "Return items with a completed date newer than since (a string value formatted as 2007-4-29T10:13).",
+                    "required": false
+                },
+                {
+                    "name": "until",
+                    "type": "DatePicker",
+                    "info": "Return items with a completed date same or older than until (a string value formatted as 2007-4-29T10:13).",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "The number of events to return, where the default is 30, and the maximum is 100.",
+                    "required": false
+                },
+                {
+                    "name": "offset",
+                    "type": "Number",
+                    "info": "The number of events to skip, which can be used for pagination in order to get more events than those returned by the previous call.",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getBackups",
+            "description": "Todoist creates a backup archive of users\u2019 data on a daily basis. Backup archives can also be accessed from the web app (Todoist Settings -> Backups).",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createObjectEmail",
+            "description": "Creates a new email address for an object.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "objType",
+                    "type": "Select",
+                    "options": [
+                        "project",
+                        "project_comments",
+                        "item"
+                    ],
+                    "info": "The object\u2019s type.",
+                    "required": true
+                },
+                {
+                    "name": "objId",
+                    "type": "Number",
+                    "info": "The object\u2019s id.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getObjectEmail",
+            "description": "Gets an existing email.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "objType",
+                    "type": "Select",
+                    "options": [
+                        "project",
+                        "project_comments",
+                        "item"
+                    ],
+                    "info": "The object\u2019s type.",
+                    "required": true
+                },
+                {
+                    "name": "objId",
+                    "type": "Number",
+                    "info": "The object\u2019s id.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "disableObjectEmail",
+            "description": "Disables an email address for an object.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "objType",
+                    "type": "Select",
+                    "options": [
+                        "project",
+                        "project_comments",
+                        "item"
+                    ],
+                    "info": "The object\u2019s type.",
+                    "required": true
+                },
+                {
+                    "name": "objId",
+                    "type": "Number",
+                    "info": "The object\u2019s id.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getUploadsFiles",
+            "description": "Get all user\u2019s uploads.",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "The number of items to return (a number, where the default is 30, and the maximum is 50).",
+                    "required": true
+                },
+                {
+                    "name": "lastId",
+                    "type": "Number",
+                    "info": "Can be used for pagination. This should be the minimum upload id you\u2019ve fetched so far. All results will be listed before that id.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteExistingUser",
+            "description": "Delete an existing user",
+            "args": [
+                {
+                    "name": "apiToken",
+                    "type": "credentials",
+                    "info": "The user\u2019s API token from your account settings.",
+                    "required": true
+                },
+                {
+                    "name": "currentPassword",
+                    "type": "Number",
+                    "info": "The number of items to return (a number, where the default is 30, and the maximum is 50).",
+                    "required": true
+                },
+                {
+                    "name": "reasonForDelete",
+                    "type": "String",
+                    "info": "A reason for deletion, that is used for sending feedback back to Todoist.",
+                    "required": false
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        }
+    ]
+}
