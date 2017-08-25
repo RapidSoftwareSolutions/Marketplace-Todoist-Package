@@ -15,7 +15,7 @@ $app->post('/api/Todoist/revokeAccessToken', function ($request, $response) {
     $requiredParams = ['clientId'=>'client_id','clientSecret'=>'client_secret','accessToken'=>'access_token'];
     $optionalParams = [];
     $bodyParams = [
-       'query' => ['client_id','client_secret','access_token']
+       'json' => ['client_id','client_secret','access_token']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
