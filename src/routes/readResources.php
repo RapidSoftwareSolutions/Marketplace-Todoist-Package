@@ -4,7 +4,7 @@ $app->post('/api/Todoist/readResources', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiToken','syncToken','resourceTypes']);
+    $validateRes = $checkRequest->validate($request, ['accessToken','syncToken','resourceTypes']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,7 +12,7 @@ $app->post('/api/Todoist/readResources', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiToken'=>'token','syncToken'=>'sync_token','resourceTypes'=>'resource_types'];
+    $requiredParams = ['accessToken'=>'token','syncToken'=>'sync_token','resourceTypes'=>'resource_types'];
     $optionalParams = [];
     $bodyParams = [
        'query' => ['token','sync_token','resource_types']

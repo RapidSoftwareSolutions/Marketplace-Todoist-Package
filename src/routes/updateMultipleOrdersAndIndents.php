@@ -4,7 +4,7 @@ $app->post('/api/Todoist/updateMultipleOrdersAndIndents', function ($request, $r
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiToken','uuid','idsToOrdersIndents']);
+    $validateRes = $checkRequest->validate($request, ['accessToken','uuid','idsToOrdersIndents']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,7 +12,7 @@ $app->post('/api/Todoist/updateMultipleOrdersAndIndents', function ($request, $r
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiToken'=>'token','uuid'=>'uuid','idsToOrdersIndents'=>'ids_to_orders_indents'];
+    $requiredParams = ['accessToken'=>'token','uuid'=>'uuid','idsToOrdersIndents'=>'ids_to_orders_indents'];
     $optionalParams = [];
     $bodyParams = [
        'query' => ['token','ids_to_orders_indents','uuid']

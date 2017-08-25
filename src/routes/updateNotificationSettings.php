@@ -4,7 +4,7 @@ $app->post('/api/Todoist/updateNotificationSettings', function ($request, $respo
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiToken','notificationType','service','dontNotify']);
+    $validateRes = $checkRequest->validate($request, ['accessToken','notificationType','service','dontNotify']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,7 +12,7 @@ $app->post('/api/Todoist/updateNotificationSettings', function ($request, $respo
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiToken'=>'token','notificationType'=>'notification_type','service'=>'service','dontNotify'=>'dont_notify'];
+    $requiredParams = ['accessToken'=>'token','notificationType'=>'notification_type','service'=>'service','dontNotify'=>'dont_notify'];
     $optionalParams = [];
     $bodyParams = [
        'query' => ['token','dont_notify','service','notification_type']

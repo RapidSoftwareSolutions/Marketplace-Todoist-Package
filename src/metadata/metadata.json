@@ -16,8 +16,7 @@
         "domain": "todoist.com",
         "credentials": [
             "clientId",
-            "clientSecret",
-            "apiToken"
+            "clientSecret"
         ]
     },
     "events": [
@@ -57,9 +56,9 @@
             ],
             "args": [
                 {
-                    "name": "apiToken",
+                    "name": "accessToken",
                     "type": "String",
-                    "info": "Token obtained from the email\/password authentication.",
+                    "info": "Access token obtained from the OAuth authentication",
                     "required": false
                 }
             ]
@@ -197,9 +196,9 @@
             "description": "All API endpoints not related to the 3 OAuth steps support Cross Origin Resource Sharing (CORS) for requests from any origin.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "Token obtained from the email\/password authentication.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication",
                     "required": true
                 },
                 {
@@ -225,9 +224,9 @@
             "description": "Tokens obtained via the old email\/password authentication method could be migrated to the new OAuth access token.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -278,9 +277,9 @@
             "description": "Create project.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -351,9 +350,9 @@
             "description": "Update an existing project.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -427,9 +426,9 @@
             "description": "Delete an existing project.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -466,9 +465,9 @@
             "description": "Archive project and its children.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -505,9 +504,9 @@
             "description": "Unarchive project and its children.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -544,9 +543,9 @@
             "description": "Update the orders and indents of multiple projects at once.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -604,9 +603,9 @@
             "description": "Add a new task to a project.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -772,9 +771,9 @@
             "description": "Updates an item for the user related to the API credentials.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -930,9 +929,9 @@
             "description": "Delete an existing task.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -969,9 +968,9 @@
             "description": "Move a task from one project to another project.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -1017,9 +1016,9 @@
             "description": "Complete tasks and optionally move them to history. See also itemClose for a simplified version of the command.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -1066,9 +1065,9 @@
             "description": "Uncomplete tasks and move them to the active projects.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -1111,9 +1110,9 @@
             "description": "Complete a recurring task, and the reason why this is a special case is because we need to mark a recurring completion (and using itemUpdate won\u2019t do this). See also item_close for a simplified version of the command.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -1176,9 +1175,9 @@
             "description": "A simplified version of itemComplete . The command does exactly what official clients do when you close a task: regular task is completed and moved to history, subtask is checked (marked as done, but not moved to history), recurring task is moved forward (due date is updated).",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -1219,9 +1218,9 @@
             "description": "Update the day orders of multiple items at once.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -1261,9 +1260,9 @@
             "description": "Create a label.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -1322,9 +1321,9 @@
             "description": "Update a label.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -1383,9 +1382,9 @@
             "description": "Update a label.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -1426,9 +1425,9 @@
             "description": "A dictionary, where a label id is the key, and the order its value: labelId : order.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -1474,9 +1473,9 @@
             "description": "Add a note.Is only available for Todoist Premium.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -1546,9 +1545,9 @@
             "description": "Add a project note.Is only available for Todoist Premium.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -1601,9 +1600,9 @@
             "description": "Update a note.Is only available for Todoist Premium.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -1656,9 +1655,9 @@
             "description": "Delete a note.Is only available for Todoist Premium.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -1699,9 +1698,9 @@
             "description": "Add a filter.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -1760,9 +1759,9 @@
             "description": "Update a filter.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -1827,9 +1826,9 @@
             "description": "Delete a filter.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -1870,9 +1869,9 @@
             "description": "Add a new reminder to the user account related to the API credentials.Is only available for Todoist Premium.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -2011,9 +2010,9 @@
             "description": "Update a reminder from the user account related to the API credentials.Is only available for Todoist Premium.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -2141,9 +2140,9 @@
             "description": "Delete a reminder from the user account related to the API credentials.Is only available for Todoist Premium.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -2183,9 +2182,9 @@
             "description": "Clears the locations list, which is used for the location reminders.Is only available for Todoist Premium.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -2220,9 +2219,9 @@
             "description": "Get the user\u2019s productivity stats.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 }
             ],
@@ -2242,9 +2241,9 @@
             "description": "Only available for Todoist Premium users.Get all the user\u2019s completed items (tasks).Is only available for Todoist Premium.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -2304,9 +2303,9 @@
             "description": "Get the user\u2019s archived projects.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 }
             ],
@@ -2326,14 +2325,14 @@
             "description": "This function is used to extract detailed information about the item, including all the notes.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
                     "name": "itemId",
-                    "type": "Number",
+                    "type": "String",
                     "info": "The item\u2019s unique id.",
                     "required": true
                 },
@@ -2364,14 +2363,14 @@
             "description": "This function is used to extract detailed information about the project, including all the note",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
                     "name": "projectId",
-                    "type": "Number",
+                    "type": "String",
                     "info": "The project\u2019s unique id.",
                     "required": true
                 },
@@ -2402,14 +2401,14 @@
             "description": "Get a project\u2019s uncompleted items.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
                     "name": "projectId",
-                    "type": "Number",
+                    "type": "String",
                     "info": "The project\u2019s unique id.",
                     "required": true
                 }
@@ -2430,9 +2429,9 @@
             "description": "Add a new task using the Quick Add Task implementation available in the official clients.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -2470,9 +2469,9 @@
             "description": "Register a new user.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -2538,9 +2537,9 @@
             "description": "Update user\u2019s properties",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -2685,9 +2684,9 @@
             "description": "Update the karma goals of the user.Is only available for Todoist Premium.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -2760,9 +2759,9 @@
             "description": "Update the user\u2019s notification settings.Is only available for Todoist Premium.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -2833,9 +2832,9 @@
             "description": "Share a project with another user.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -2881,9 +2880,9 @@
             "description": "Share a project with another user.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -2929,9 +2928,9 @@
             "description": "Accept an invitation to join a shared project.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -2978,9 +2977,9 @@
             "description": "Reject an invitation to join a shared project.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -3027,9 +3026,9 @@
             "description": "Delete an invitation to join a shared project.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -3070,9 +3069,9 @@
             "description": "Set the last known notification.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -3113,9 +3112,9 @@
             "description": "Mark the notification as read.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -3156,9 +3155,9 @@
             "description": "Mark all notifications as read.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -3193,9 +3192,9 @@
             "description": "Mark the notification as unread.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -3236,9 +3235,9 @@
             "description": "This function allows you to send invitation to your business account. Every invitation object has an unique id and secret code.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -3275,9 +3274,9 @@
             "description": "This function allows you to send invitation to your business account. Every invitation object has an unique id and secret code.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -3309,9 +3308,9 @@
             "description": "The invitation is rejected and deleted. Note that the client doesn\u2019t have to provide the user\u2019s token to reject invitation: it\u2019s enough to provide knowledge of invitation secret business account yet.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -3343,9 +3342,9 @@
             "description": "Get activity logs.Is only available for Todoist Premium.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -3431,9 +3430,9 @@
             "description": "Todoist creates a backup archive of users\u2019 data on a daily basis. Backup archives can also be accessed from the web app (Todoist Settings -> Backups).",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 }
             ],
@@ -3453,9 +3452,9 @@
             "description": "Creates a new email address for an object.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -3492,9 +3491,9 @@
             "description": "Gets an existing email.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -3531,9 +3530,9 @@
             "description": "Disables an email address for an object.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -3570,9 +3569,9 @@
             "description": "Get all user\u2019s uploads.",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {
@@ -3604,9 +3603,9 @@
             "description": "Delete an existing user",
             "args": [
                 {
-                    "name": "apiToken",
-                    "type": "credentials",
-                    "info": "The user\u2019s API token from your account settings.",
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
                     "required": true
                 },
                 {

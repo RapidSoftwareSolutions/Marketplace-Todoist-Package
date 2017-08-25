@@ -4,7 +4,7 @@ $app->post('/api/Todoist/getObjectEmail', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiToken','objType','objId']);
+    $validateRes = $checkRequest->validate($request, ['accessToken','objType','objId']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,7 +12,7 @@ $app->post('/api/Todoist/getObjectEmail', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiToken'=>'token','objType'=>'obj_type','objId'=>'obj_id'];
+    $requiredParams = ['accessToken'=>'token','objType'=>'obj_type','objId'=>'obj_id'];
     $optionalParams = [];
     $bodyParams = [
        'query' => ['token','obj_type','obj_id']

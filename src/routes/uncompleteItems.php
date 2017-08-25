@@ -4,7 +4,7 @@ $app->post('/api/Todoist/uncompleteItems', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiToken','uuid','itemIds']);
+    $validateRes = $checkRequest->validate($request, ['accessToken','uuid','itemIds']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,7 +12,7 @@ $app->post('/api/Todoist/uncompleteItems', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiToken'=>'token','uuid'=>'uuid','itemIds'=>'ids'];
+    $requiredParams = ['accessToken'=>'token','uuid'=>'uuid','itemIds'=>'ids'];
     $optionalParams = ['restoreState'=>'restore_state'];
     $bodyParams = [
        'query' => ['token','restore_state','uuid','ids']

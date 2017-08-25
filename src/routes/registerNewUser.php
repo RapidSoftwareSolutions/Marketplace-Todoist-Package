@@ -4,7 +4,7 @@ $app->post('/api/Todoist/registerNewUser', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiToken','email','fullName','password']);
+    $validateRes = $checkRequest->validate($request, ['accessToken','email','fullName','password']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,7 +12,7 @@ $app->post('/api/Todoist/registerNewUser', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiToken'=>'token','email'=>'email','fullName'=>'full_name','password'=>'password'];
+    $requiredParams = ['accessToken'=>'token','email'=>'email','fullName'=>'full_name','password'=>'password'];
     $optionalParams = ['lang'=>'lang','timezone'=>'timezone'];
     $bodyParams = [
        'query' => ['token','email','lang','password','full_name','timezone']

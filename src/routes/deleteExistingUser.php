@@ -4,7 +4,7 @@ $app->post('/api/Todoist/deleteExistingUser', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiToken','currentPassword']);
+    $validateRes = $checkRequest->validate($request, ['accessToken','currentPassword']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,7 +12,7 @@ $app->post('/api/Todoist/deleteExistingUser', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiToken'=>'token','currentPassword'=>'current_password'];
+    $requiredParams = ['accessToken'=>'token','currentPassword'=>'current_password'];
     $optionalParams = ['reasonForDelete'=>'reason_for_delete'];
     $bodyParams = [
        'query' => ['token','current_password','reason_for_delete']

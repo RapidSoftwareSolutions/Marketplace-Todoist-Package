@@ -4,7 +4,7 @@ $app->post('/api/Todoist/quickAddTask', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiToken','text']);
+    $validateRes = $checkRequest->validate($request, ['accessToken','text']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,7 +12,7 @@ $app->post('/api/Todoist/quickAddTask', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiToken'=>'token','text'=>'text'];
+    $requiredParams = ['accessToken'=>'token','text'=>'text'];
     $optionalParams = ['note'=>'note','reminder'=>'reminder'];
     $bodyParams = [
        'query' => ['token','text','note','reminder']

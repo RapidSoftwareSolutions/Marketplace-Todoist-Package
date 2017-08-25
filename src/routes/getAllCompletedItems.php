@@ -4,7 +4,7 @@ $app->post('/api/Todoist/getAllCompletedItems', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiToken']);
+    $validateRes = $checkRequest->validate($request, ['accessToken']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,7 +12,7 @@ $app->post('/api/Todoist/getAllCompletedItems', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiToken'=>'token'];
+    $requiredParams = ['accessToken'=>'token'];
     $optionalParams = ['projectId'=>'project_id','limit'=>'limit','offset'=>'offset','until'=>'until','since'=>'since','annotateNotes'=>'annotate_notes'];
     $bodyParams = [
        'query' => ['token','project_id','limit','offset','until','since','annotate_notes']

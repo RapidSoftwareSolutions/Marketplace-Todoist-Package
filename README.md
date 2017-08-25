@@ -2,11 +2,12 @@
 # Todoist Package
 Todoist offers more useful features than any other to do service. So you can do more to customize the experience, organize your tasks and projects, and optimize your productivity.
 * Domain: [todoist.com](https://todoist.com)
-* Credentials: clientId, clientSecret, apiToken
+* Credentials: clientId, clientSecret
 
 ## How to get credentials: 
 1. Register on the [todoist.com](https://todoist.com).
-2. On the Settings/Integrations page you'll see your apiToken.
+2. Create your Todoist Application in [console](https://developer.todoist.com/appconsole.html).
+3. After creation app, you will receive clientId / clientSecret.
 
  ## Custom datatypes:
    |Datatype|Description|Example
@@ -44,14 +45,14 @@ Tokens obtained via the old email/password authentication method could be migrat
 | clientId    | credentials| The unique Client ID of the Todoist application that you registered.
 | clientSecret| credentials| The unique Client Secret of the Todoist application that you registered.
 | apiToken    | String     | Token obtained from the email/password authentication.
-| scope       | List       | Scopes of the OAuth token. Please refer to the OAuth section for the detailed list of available scopes.List - task:add, data:read, data:read_write, data:delete, project:delete.
+| scope       | List       | Scopes of the OAuth token. Please refer to the OAuth section for the detailed list of available scopes.Select options - task:add, data:read, data:read_write, data:delete, project:delete.
 
 ## Todoist.crossOriginResourceSharing
 All API endpoints not related to the 3 OAuth steps support Cross Origin Resource Sharing (CORS) for requests from any origin.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| Token obtained from the email/password authentication.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | origin  | String     | Cross Origin Resource Sharing (CORS) 
 
 ## Todoist.readResources
@@ -59,18 +60,18 @@ Tokens obtained via the old email/password authentication method could be migrat
 
 | Field        | Type       | Description
 |--------------|------------|----------
-| apiToken     | credentials| The user’s API token.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | syncToken    | String     | A special string, used to allow the client to perform incremental sync. Pass * to retrieve all active resource data.
-| resourceTypes| List       | Used to specify what resources to fetch from the server.List options - "labels", "projects", "items", "notes", "filters", "reminders", "locations", "user", "live_notifications", "collaborators", "notification_settings", "all".
+| resourceTypes| List       | Used to specify what resources to fetch from the server.Select options - "labels", "projects", "items", "notes", "filters", "reminders", "locations", "user", "live_notifications", "collaborators", "notification_settings", "all".
 
 ## Todoist.createProject
 Create project.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
-|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. item_add, project_add), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
+|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. createItem, createProject), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 |commands.name| String | The name of the project (a string value).
 |commands.color| Number | The color of the project (a number between 0 and 11, or between 0 and 21 for premium users).
@@ -82,9 +83,9 @@ Update an existing project.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
-|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. item_add, project_add), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
+|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. createItem, createProject), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 |commands.name| String | The name of the project (a string value).
 |commands.color| Number | The color of the project (a number between 0 and 11, or between 0 and 21 for premium users).
@@ -96,7 +97,7 @@ Delete an existing project.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | ids     | List       | List of the ids of the projects to delete (could be temp ids).
 |uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 
@@ -105,7 +106,7 @@ Archive project and its children.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | ids     | List       | List of the ids of the projects to delete (could be temp ids).
 | uuid    | String     | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 
@@ -114,7 +115,7 @@ Unarchive project and its children.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | ids     | List       | List of the ids of the projects to delete (could be temp ids).
 | uuid    | String     | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 
@@ -123,7 +124,7 @@ Update the orders and indents of multiple projects at once.
 
 | Field             | Type       | Description
 |-------------------|------------|----------
-| apiToken          | credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | uuid    | String     | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | idsToOrdersIndents| Array      | A dictionary array, with a project id as key and a two elements list as value: project_id: item_order, indent.
 
@@ -132,15 +133,15 @@ Add a new task to a project.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
-|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. item_add, project_add), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
+|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. createItem, createProject), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.content| String      | 	The text of the task.
 | commands.projectId| String      | The id of the project to add the task to (a number or a temp id). By default the task is added to the user’s Inbox project.
 | commands.dateString| String      | The date of the task, added in free form text, for example it can be every day @ 10 (or null or an empty string to unset). Look at our reference to see [which formats are supported](https://support.todoist.com/hc/en-us/articles/205325931-Due-Dates-Times).
 | commands.dateLang| Select      | The language of the dateString. Options - en, da, pl, zh, ko, de, pt, ja, it, fr, sv, ru, es, nl.
-| commands.dueDateUtc| DatePicker      | Note that, when the due_date_utc argument is specified, the date_string is required and has to specified as well, and also, the date_string argument will be parsed as local timestamp, and converted to UTC internally, according to the user’s profile settings.
+| commands.dueDateUtc| DatePicker      | Note that, when the dueDateUtc argument is specified, the date_string is required and has to specified as well, and also, the date_string argument will be parsed as local timestamp, and converted to UTC internally, according to the user’s profile settings.
 | commands.priority| Select      | The priority of the task (a number between 1 and 4, 4 for very urgent and 1 for natural).  Keep in mind that very urgent is the priority 1 on clients. So, p1 will return 4 in the API.
 | commands.indent| Number      | The indent of the task (a number between 1 and 4, where 1 is top-level).
 | commands.itemOrder| Number     | The order of the task inside a project (a number, where the smallest value would place the task at the top).
@@ -157,16 +158,16 @@ Updates an item for the user related to the API credentials.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
-|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. item_add, project_add), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
+|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. createItem, createProject), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.id| String      | The id of the task.
 | commands.content| String      | 	The text of the task.
 | commands.projectId| String      | The id of the project to add the task to (a number or a temp id). By default the task is added to the user’s Inbox project.
 | commands.dateString| String      | The date of the task, added in free form text, for example it can be every day @ 10 (or null or an empty string to unset). Look at our reference to see [which formats are supported](https://support.todoist.com/hc/en-us/articles/205325931-Due-Dates-Times).
 | commands.dateLang| Select      | The language of the dateString. Options - en, da, pl, zh, ko, de, pt, ja, it, fr, sv, ru, es, nl.
-| commands.dueDateUtc| DatePicker      | Note that, when the due_date_utc argument is specified, the date_string is required and has to specified as well, and also, the date_string argument will be parsed as local timestamp, and converted to UTC internally, according to the user’s profile settings.
+| commands.dueDateUtc| DatePicker      | Note that, when the dueDateUtc argument is specified, the date_string is required and has to specified as well, and also, the date_string argument will be parsed as local timestamp, and converted to UTC internally, according to the user’s profile settings.
 | commands.priority| Select      | The priority of the task (a number between 1 and 4, 4 for very urgent and 1 for natural).  Keep in mind that very urgent is the priority 1 on clients. So, p1 will return 4 in the API.
 | commands.indent| Number      | The indent of the task (a number between 1 and 4, where 1 is top-level).
 | commands.itemOrder| Number     | The order of the task inside a project (a number, where the smallest value would place the task at the top).
@@ -181,7 +182,7 @@ Delete an existing task.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 |uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | itemIds | List       | List of the ids of the projects to delete (could be temp ids).
 
@@ -190,7 +191,7 @@ Move a task from one project to another project.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.projectItems| JSON      | A JSON mapping telling Todoist where the items are currently found. From project ids to item ids, for example ```{"1523":["9637423"]}```, where 1523 is the project id and 9637423 is the item id.
@@ -202,7 +203,7 @@ Complete tasks and optionally move them to history. See also itemClose for a sim
 
 | Field       | Type       | Description
 |-------------|------------|----------
-| apiToken    | credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 |uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | itemIds     | List       | A list of ids to complete (numbers or temp ids).
 | forceHistory| Select     | Whether these tasks should be moved to history (where 1 is true and 0 is false, and the default is 1) This is useful when checking off sub tasks.Options - true,false.
@@ -212,7 +213,7 @@ Uncomplete tasks and move them to the active projects.
 
 | Field       | Type       | Description
 |-------------|------------|----------
-| apiToken    | credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 |uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | itemIds     | List       | A list of items to uncomplete.
 | restoreState| JSON       | A dictionary object, where the item id is the key, and its value is a list of four elements, whether the item is in history, whether it is checked, its order and indent - ```item_id: [in_history, checked, item_order, indent]```.
@@ -222,10 +223,10 @@ Complete a recurring task, and the reason why this is a special case is because 
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 | commands.id| String      | The id of the item to update (a number or a temp id).
-| commands.newDateUtc| DatePicker      | Note that, when the new_date_utc argument is specified, the date_string is required and has to specified as well, and also, the date_string argument will be parsed as local timestamp, and converted to UTC internally, according to the user’s profile settings.
+| commands.newDateUtc| DatePicker      | Note that, when the newDateUtc argument is specified, the date_string is required and has to specified as well, and also, the date_string argument will be parsed as local timestamp, and converted to UTC internally, according to the user’s profile settings.
 | commands.dateString| String      | The date of the task, added in free form text, for example it can be every day @ 10 (or null or an empty string to unset). Look at our reference to see [which formats are supported](https://support.todoist.com/hc/en-us/articles/205325931-Due-Dates-Times).
 | commands.isForward| Select      | Whether the task is to be completed (value 1) or uncompleted (value 0), while the default is 1.Options - true,false.
 
@@ -234,7 +235,7 @@ A simplified version of itemComplete . The command does exactly what official cl
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.id| String      | 	The id of the item to close (a number or a temp id).
@@ -245,7 +246,7 @@ Update the day orders of multiple items at once.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.dayOrder| Number      | The order of the task inside the Today or Next 7 days view (a number, where the smallest value would place the task at the top).
@@ -257,9 +258,9 @@ Create a label.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
-|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. item_add, project_add), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
+|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. createItem, createProject), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.name| String      | The name of the label.
 | commands.color| Number      | The color of the label (a number between 0 and 7, or between 0 and 12 for premium users).
@@ -270,9 +271,9 @@ Update a label.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
-|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. item_add, project_add), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
+|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. createItem, createProject), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.name| String      | The name of the label.
 | commands.color| Number      | The color of the label (a number between 0 and 7, or between 0 and 12 for premium users).
@@ -283,7 +284,7 @@ Update a label.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.id| String      | The id of the label.
@@ -293,7 +294,7 @@ A dictionary, where a label id is the key, and the order its value: labelId : or
 
 | Field         | Type       | Description
 |---------------|------------|----------
-| apiToken      | credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 |uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | idOrderMapping| Array      | A dictionary, where a label id is the key, and the order its value: label_id: order.
 
@@ -302,9 +303,9 @@ Add a note.Is only available for Todoist Premium.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
-|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. item_add, project_add), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
+|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. createItem, createProject), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.itemId| String      | The item which the note is part of (a unique number or temp id).
 | commands.content| String     | The content of the note (a string value).
@@ -316,9 +317,9 @@ Add a project note.Is only available for Todoist Premium.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
-|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. item_add, project_add), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
+|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. createItem, createProject), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.projectId| String      | The project which the note is part of (a unique number or temp id).
 | commands.content| String     | The content of the note (a string value).
@@ -329,7 +330,7 @@ Update a note.Is only available for Todoist Premium.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.id| String      | The id of the note.
@@ -341,7 +342,7 @@ Delete a note.Is only available for Todoist Premium.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.id| String      | The id of the note.
@@ -351,9 +352,9 @@ Add a filter.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
-|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. item_add, project_add), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
+|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. createItem, createProject), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.name| String      | The name of the filter.
 | commands.query| String      | 	The query to search for. [Examples of searches](https://support.todoist.com/hc/en-us/articles/205248842-Filters) can be found in the Todoist help page.
@@ -366,7 +367,7 @@ Update a filter.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.id| String      | The id of the filter.
@@ -380,7 +381,7 @@ Delete a filter.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.id| String      | The id of the filter.
@@ -390,9 +391,9 @@ Add a new reminder to the user account related to the API credentials.Is only av
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
-|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. item_add, project_add), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
+|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. createItem, createProject), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.itemId| String      | The item id for which the reminder is about.
 | commands.type| Select      | 	The type of the reminder: relative for a time-based reminder specified in minutes from now, absolute for a time-based reminder with a specific time and date in the future, and location for a location-based reminder.
@@ -400,12 +401,12 @@ Add a new reminder to the user account related to the API credentials.Is only av
 | commands.service| Select      | The way to get notified of the reminder: email for e-mail, mobile for mobile text message, or push for mobile push notification.
 | commands.dateString| String      | The date of the task, added in free form text, for example it can be every day @ 10 (or null or an empty string to unset). Look at our reference to see [which formats are supported](https://support.todoist.com/hc/en-us/articles/205325931-Due-Dates-Times).
 | commands.dateLang| Select      | The language of the dateString. Options - en, da, pl, zh, ko, de, pt, ja, it, fr, sv, ru, es, nl.
-| commands.dueDateUtc| DatePicker      | Note that, when the due_date_utc argument is specified, the date_string is required and has to specified as well, and also, the date_string argument will be parsed as local timestamp, and converted to UTC internally, according to the user’s profile settings.
+| commands.dueDateUtc| DatePicker      | Note that, when the dueDateUtc argument is specified, the date_string is required and has to specified as well, and also, the date_string argument will be parsed as local timestamp, and converted to UTC internally, according to the user’s profile settings.
 | commands.minuteOffset| Number     | The relative time in minutes before the due date of the item, in which the reminder should be triggered. Note, that the item should have a due date set in order to add a relative reminder.
 | commands.name| String     |	An alias name for the location.
 | commands.coordinates| Map      |	Location longitude and location latitude.
 | commands.locTrigger| String     | 	What should trigger the reminder: on_enter for entering the location, or on_leave for leaving the location.
-| commands.radius| radius      | 	The radius around the location that is still considered as part of the location (in meters).
+| commands.radius| Number     | 	The radius around the location that is still considered as part of the location (in meters).
 
 
 ## Todoist.updateReminder
@@ -413,7 +414,7 @@ Update a reminder from the user account related to the API credentials.Is only a
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.id| String      | 	The id of the reminder.
@@ -422,19 +423,19 @@ Update a reminder from the user account related to the API credentials.Is only a
 | commands.service| Select      | The way to get notified of the reminder: email for e-mail, mobile for mobile text message, or push for mobile push notification.
 | commands.dateString| String      | The date of the task, added in free form text, for example it can be every day @ 10 (or null or an empty string to unset). Look at our reference to see [which formats are supported](https://support.todoist.com/hc/en-us/articles/205325931-Due-Dates-Times).
 | commands.dateLang| Select      | The language of the dateString. Options - en, da, pl, zh, ko, de, pt, ja, it, fr, sv, ru, es, nl.
-| commands.dueDateUtc| DatePicker      | Note that, when the due_date_utc argument is specified, the date_string is required and has to specified as well, and also, the date_string argument will be parsed as local timestamp, and converted to UTC internally, according to the user’s profile settings.
+| commands.dueDateUtc| DatePicker      | Note that, when the dueDateUtc argument is specified, the date_string is required and has to specified as well, and also, the date_string argument will be parsed as local timestamp, and converted to UTC internally, according to the user’s profile settings.
 | commands.minuteOffset| Number     | The relative time in minutes before the due date of the item, in which the reminder should be triggered. Note, that the item should have a due date set in order to add a relative reminder.
 | commands.name| String     |	An alias name for the location.
 | commands.coordinates| Map      |	Location longitude and location latitude.
 | commands.locTrigger| String     | 	What should trigger the reminder: on_enter for entering the location, or on_leave for leaving the location.
-| commands.radius| radius      | 	The radius around the location that is still considered as part of the location (in meters).
+| commands.radius| Number      | 	The radius around the location that is still considered as part of the location (in meters).
 
 ## Todoist.deleteReminder
 Delete a reminder from the user account related to the API credentials.Is only available for Todoist Premium.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.id| String      | The id of the reminder.
@@ -444,7 +445,7 @@ Clears the locations list, which is used for the location reminders.Is only avai
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 
@@ -453,15 +454,15 @@ Get the user’s productivity stats.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 
 ## Todoist.getAllCompletedItems
 Only available for Todoist Premium users.Get all the user’s completed items (tasks).Is only available for Todoist Premium.
 
 | Field        | Type       | Description
 |--------------|------------|----------
-| apiToken     | credentials| The user’s API token from your account settings.
-| projectId    | Number     | Filter the tasks by project id.
+| accessToken | String| Access token obtained from the OAuth authentication.
+| projectId    | String     | Filter the tasks by project id.
 | limit        | Number     | The number of items to return (where the default is 30, and the maximum is 50).
 | offset       | Number     | Can be used for pagination, when more than the limit number of tasks are returned.
 | until        | DatePicker | Return items with a completed date same or older than until (a string value formatted as 2007-4-29T10:13).
@@ -473,15 +474,15 @@ Get the user’s archived projects.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 
 ## Todoist.getItemInfo
 This function is used to extract detailed information about the item, including all the notes.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
-| itemId  | Number     | The item’s unique id.
+| accessToken | String| Access token obtained from the OAuth authentication.
+| itemId  | String     | The item’s unique id.
 | allData | Select     | Whether to return the parent project and notes of the item (a true or false value, while the default is true).
 
 ## Todoist.getProjectInfo
@@ -489,8 +490,8 @@ This function is used to extract detailed information about the project, includi
 
 | Field    | Type       | Description
 |----------|------------|----------
-| apiToken | credentials| The user’s API token from your account settings.
-| projectId| Number     | The project’s unique id.
+| accessToken | String| Access token obtained from the OAuth authentication.
+| projectId| String     | The project’s unique id.
 | allData  | Select     | Whether to return the parent project and notes of the item (a true or false value, while the default is true).
 
 ## Todoist.getProjectData
@@ -498,15 +499,15 @@ Get a project’s uncompleted items.
 
 | Field    | Type       | Description
 |----------|------------|----------
-| apiToken | credentials| The user’s API token from your account settings.
-| projectId| Number     | The project’s unique id.
+| accessToken | String| Access token obtained from the OAuth authentication.
+| projectId| String     | The project’s unique id.
 
 ## Todoist.quickAddTask
 Add a new task using the Quick Add Task implementation available in the official clients.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | text    | String     | The text of the task that is parsed. It can include a due date in free form text, a project name starting with the # character, a label starting with the @ character, and an assignee starting with the + character.
 | note    | String     | The content of the note.
 | reminder| DatePicker | The date of the reminder, added in free form text.
@@ -516,7 +517,7 @@ Register a new user.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | email   | String     | The user’s email.
 | fullName| String     | The user’s real name formatted as Firstname Lastname.
 | password| String     | The user’s password.
@@ -528,7 +529,7 @@ Update user’s properties
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.email| String      | 	The user’s email.
@@ -554,9 +555,9 @@ Update the karma goals of the user.Is only available for Todoist Premium.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
-|commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
+|commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the syncStatus field of the response JSON object. The syncStatus object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.dailyGoal| Number     | The target number of tasks to complete per day.
 | commands.weeklyGoal| Number     | The target number of tasks to complete per week.
 | commands.ignoreDays| Number     | 	A list with the days of the week to ignore (1 for Monday and 7 for Sunday).
@@ -568,7 +569,7 @@ Update the user’s notification settings.Is only available for Todoist Premium.
 
 | Field           | Type       | Description
 |-----------------|------------|----------
-| apiToken        | credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | notificationType| List       | The notification type.
 | service         | Select     | The service type, which can take the values: email or push.
 | dontNotify      | Select     | Whether notifications of this service should be notified (1 to not notify, and 0 to notify).
@@ -578,10 +579,10 @@ Share a project with another user.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
-|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. item_add, project_add), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
-|commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
+|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. createItem, createProject), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
+|commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the syncStatus field of the response JSON object. The syncStatus object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.projectId| String     | 	The project to be shared.
 | commands.email| String     | 	The user email with whom to share the project.
 
@@ -590,7 +591,7 @@ Share a project with another user.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.projectId| String     | 	The project to be shared.
@@ -601,7 +602,7 @@ Accept an invitation to join a shared project.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.invitationId| Number      | The invitation id.
@@ -612,7 +613,7 @@ Reject an invitation to join a shared project.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.invitationId| Number      | The invitation id.
@@ -623,7 +624,7 @@ Delete an invitation to join a shared project.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.invitationId| Number      | The invitation id.
@@ -633,7 +634,7 @@ Set the last known notification.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.id| Number      | 	The id of the last known notification (a number or 0 or null to mark all read).
@@ -643,7 +644,7 @@ Mark the notification as read.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.id| Number      | 	The id of the notification.
@@ -653,7 +654,7 @@ Mark all notifications as read.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 
@@ -662,7 +663,7 @@ Mark the notification as unread.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.id| Number      | 	The id of the notification.
@@ -672,7 +673,7 @@ This function allows you to send invitation to your business account. Every invi
 
 | Field    | Type       | Description
 |----------|------------|----------
-| apiToken | credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | emailList| List       | The emails of users which will be invited.
 | message  | String     | Additional text which will be included to invitation welcome message.
 
@@ -681,7 +682,7 @@ This function allows you to send invitation to your business account. Every invi
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | id      | Number     | The invitation id (a number).
 | secret  | String     | The secret fetched from the live notification (a string value).
 
@@ -690,7 +691,7 @@ The invitation is rejected and deleted. Note that the client doesn’t have to p
 
 | Field       | Type       | Description
 |-------------|------------|----------
-| apiToken    | credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | invitationId| Number     | The invitation id (a number).
 | secret      | String     | The secret fetched from the live notification (a string value).
 
@@ -699,7 +700,7 @@ Get activity logs.Is only available for Todoist Premium.
 
 | Field           | Type       | Description
 |-----------------|------------|----------
-| apiToken        | credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | objectType      | String     | Filters events by a specific object type.
 | objectId        | Number     | Filters events by a specific object id, but only if the objectType has been also specified.
 | eventType       | String     | Filters events by a specific event type.
@@ -717,14 +718,14 @@ Todoist creates a backup archive of users’ data on a daily basis. Backup archi
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 
 ## Todoist.createObjectEmail
 Creates a new email address for an object.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | objType | Select     | The object’s type.
 | objId   | Number     | The object’s id.
 
@@ -733,7 +734,7 @@ Gets an existing email.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | objType | Select     | The object’s type.Options - project, project_comments or item.
 | objId   | Number     | The object’s id.
 
@@ -742,7 +743,7 @@ Disables an email address for an object.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | objType | Select     | The object’s type.Options - project, project_comments or item.
 | objId   | Number     | The object’s id.
 
@@ -751,7 +752,7 @@ Get all user’s uploads.
 
 | Field   | Type       | Description
 |---------|------------|----------
-| apiToken| credentials| The user’s API token from your account settings.
+| accessToken | String| Access token obtained from the OAuth authentication.
 | limit   | Number     | The number of items to return (a number, where the default is 30, and the maximum is 50).
 | lastId  | Number     | Can be used for pagination. This should be the minimum upload id you’ve fetched so far. All results will be listed before that id.
 
@@ -760,7 +761,7 @@ Delete an existing user
 
 | Field          | Type       | Description
 |----------------|------------|----------
-| apiToken       | credentials| The user’s API token from your account settings.
-| currentPassword| Number     | The number of items to return (a number, where the default is 30, and the maximum is 50).
+| accessToken | String| Access token obtained from the OAuth authentication.
+| currentPassword| String    | 	The user’s current password.
 | reasonForDelete| String     | A reason for deletion, that is used for sending feedback back to Todoist.
 

@@ -4,7 +4,7 @@ $app->post('/api/Todoist/acceptBusinessInvitation', function ($request, $respons
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiToken','id','secret']);
+    $validateRes = $checkRequest->validate($request, ['accessToken','id','secret']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,7 +12,7 @@ $app->post('/api/Todoist/acceptBusinessInvitation', function ($request, $respons
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiToken'=>'token','id'=>'id','secret'=>'secret'];
+    $requiredParams = ['accessToken'=>'token','id'=>'id','secret'=>'secret'];
     $optionalParams = [];
     $bodyParams = [
        'query' => ['token','id','secret']

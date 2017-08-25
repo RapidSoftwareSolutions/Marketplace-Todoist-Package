@@ -4,7 +4,7 @@ $app->post('/api/Todoist/getUploadsFiles', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiToken','limit','lastId']);
+    $validateRes = $checkRequest->validate($request, ['accessToken','limit','lastId']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,7 +12,7 @@ $app->post('/api/Todoist/getUploadsFiles', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiToken'=>'token','limit'=>'limit','lastId'=>'last_id'];
+    $requiredParams = ['accessToken'=>'token','limit'=>'limit','lastId'=>'last_id'];
     $optionalParams = [];
     $bodyParams = [
        'query' => ['token','obj_type','obj_id']

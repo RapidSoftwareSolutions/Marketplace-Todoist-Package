@@ -4,7 +4,7 @@ $app->post('/api/Todoist/getActivityLogs', function ($request, $response) {
 
     $settings = $this->settings;
     $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['apiToken']);
+    $validateRes = $checkRequest->validate($request, ['accessToken']);
 
     if(!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback']=='error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
@@ -12,7 +12,7 @@ $app->post('/api/Todoist/getActivityLogs', function ($request, $response) {
         $post_data = $validateRes;
     }
 
-    $requiredParams = ['apiToken'=>'token'];
+    $requiredParams = ['accessToken'=>'token'];
     $optionalParams = ['objectType'=>'object_type','objectId'=>'object_id','eventType'=>'event_type','objectEventTypes'=>'object_event_types','parentProjectId'=>'parent_project_id','parentItemId'=>'parent_item_id','initiatorId'=>'initiator_id','since'=>'since','until'=>'until','limit'=>'limit','offset'=>'offset'];
     $bodyParams = [
        'query' => ['token','parent_item_id','object_type','object_id','event_type','object_event_types','parent_project_id','initiator_id','since','until','limit','offset']
