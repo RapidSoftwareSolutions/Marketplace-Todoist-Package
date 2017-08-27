@@ -765,3 +765,10 @@ Delete an existing user
 | currentPassword| String    | 	The user’s current password.
 | reasonForDelete| String     | A reason for deletion, that is used for sending feedback back to Todoist.
 
+## Todoist.createMultipleCommand
+Create request with multiple command. See more about multiple commands [here](https://developer.todoist.com/sync/v7/#sync)
+
+| Field          | Type       | Description
+|----------------|------------|----------
+| accessToken | String| Access token obtained from the OAuth authentication.
+| commands | JSON    | 	Array of Command object. Each command will be processed in the specified order.

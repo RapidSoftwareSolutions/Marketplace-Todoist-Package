@@ -4591,6 +4591,49 @@
           "info":"Success"
         }
       ]
+    },
+    {
+      "name":"createMultipleCommand",
+      "description":"Create request with multiple command.See more in readme.",
+      "args":[
+        {
+          "name":"accessToken",
+          "vendorName":"token",
+          "type":"String",
+          "info":"Access token obtained from the OAuth authentication.",
+          "required":true
+        },
+        {
+          "name":"commands",
+          "vendorName":"commands",
+          "type":"JSON",
+          "info":"A JSON array of Command object. Each command will be processed in the specified order.",
+          "required":true
+        }
+      ],
+      "url":"https://todoist.com/api/v7/sync",
+      "request":{
+        "method":"post",
+        "params":[
+          {
+            "paramsType":"query",
+            "bodyParams":[
+              "token",
+              "commands"
+            ]
+          }
+        ]
+      },
+      "callbacks":[
+        {
+          "name":"error",
+          "info":"Error"
+        },
+        {
+          "name":"success",
+          "info":"Success"
+        }
+      ]
     }
   ]
 }

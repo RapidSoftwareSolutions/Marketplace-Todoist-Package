@@ -3631,6 +3631,34 @@
                     "info": "Success"
                 }
             ]
+        },
+        {
+            "name": "createMultipleCommand",
+            "description": "Create request with multiple command.See more in readme.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Access token obtained from the OAuth authentication.",
+                    "required": true
+                },
+                {
+                    "name": "commands",
+                    "type": "JSON",
+                    "info": "A JSON array of Command object. Each command will be processed in the specified order.",
+                    "required": true
+                }
+            ],
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
         }
     ]
 }
