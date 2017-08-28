@@ -679,7 +679,7 @@
                         },
                         {
                             "name": "dayOrder",
-                            "type": "String",
+                            "type": "Number",
                             "info": "The order of the task inside the Today or Next 7 days view (a number, where the smallest value would place the task at the top).",
                             "required": false
                         },
@@ -839,7 +839,7 @@
                         },
                         {
                             "name": "dayOrder",
-                            "type": "String",
+                            "type": "Number",
                             "info": "The order of the task inside the Today or Next 7 days view (a number, where the smallest value would place the task at the top).",
                             "required": false
                         },
@@ -1180,7 +1180,7 @@
                     },
                         {
                             "name": "dayOrder",
-                            "type": "String",
+                            "type": "Number",
                             "info": "The order of the task inside the Today or Next 7 days view (a number, where the smallest value would place the task at the top).",
                             "required": true
                         }
