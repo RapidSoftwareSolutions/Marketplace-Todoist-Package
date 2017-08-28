@@ -356,7 +356,7 @@ Add a filter.
 |commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. createItem, createProject), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the sync_status field of the response JSON object. The sync_status object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.name| String      | The name of the filter.
-| commands.query| String      | 	The query to search for. [Examples of searches](https://support.todoist.com/hc/en-us/articles/205248842-Filters) can be found in the Todoist help page.
+| commands.query| String      | The query to search for. [Examples of searches](https://support.todoist.com/hc/en-us/articles/205248842-Filters) can be found in the Todoist help page.
 |commands.color| Number | The color of the project (a number between 0 and 11, or between 0 and 21 for premium users).
 |commands.itemOrder| Number | Filters order in the filter list (a number, where the smallest value should place the project at the top).
 

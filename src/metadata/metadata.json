@@ -1643,6 +1643,12 @@
                             "required": true
                         },
                         {
+                            "name": "name",
+                            "type": "String",
+                            "info": "The name of the filter.",
+                            "required": true
+                        },
+                        {
                             "name": "query",
                             "type": "String",
                             "info": "The query to search for.",
