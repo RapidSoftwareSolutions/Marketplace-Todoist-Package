@@ -147,7 +147,7 @@ Add a new task to a project.
 | commands.itemOrder| Number     | The order of the task inside a project (a number, where the smallest value would place the task at the top).
 | commands.dayOrder| Number     | The order of the task inside the Today or Next 7 days view (a number, where the smallest value would place the task at the top).
 | commands.collapsed| Select     | Whether the task’s sub-tasks are collapsed (where 1 is true and 0 is false).Options - true,false.
-| commands.labels| List   |	The tasks labels (a list of label ids such as (2324,2525)).
+| commands.labels| JSON   |	The tasks labels (a list of label ids such as ```[2324,2525]```).
 | commands.assignedByUid| Number      | The id of user who assigns the current task. This makes sense for shared projects only. Accepts 0 or any user id from the list of project collaborators. If this value is unset or invalid, it will be automatically setup to your uid.
 | commands.responsibleUid | Number      | 	The id of user who is responsible for accomplishing the current task. This makes sense for shared projects only. Accepts any user id from the list of project collaborators or null or an empty string to unset.
 | commands.autoReminder| Select      | When this option is enabled, the default reminder will be added to the new item if it has a due date with time set.
@@ -173,8 +173,7 @@ Updates an item for the user related to the API credentials.
 | commands.itemOrder| Number     | The order of the task inside a project (a number, where the smallest value would place the task at the top).
 | commands.dayOrder| Number     | The order of the task inside the Today or Next 7 days view (a number, where the smallest value would place the task at the top).
 | commands.collapsed| Select     | Whether the task’s sub-tasks are collapsed (where 1 is true and 0 is false).Options - true,false.
-| commands.labels| List   |	The tasks labels (a list of label ids such as (2324,2525)).
-| commands.assignedByUid| Number      | The id of user who assigns the current task. This makes sense for shared projects only. Accepts 0 or any user id from the list of project collaborators. If this value is unset or invalid, it will be automatically setup to your uid.
+| commands.labels| JSON   |	The tasks labels (a list of label ids such as ```[2324,2525]```).| commands.assignedByUid| Number      | The id of user who assigns the current task. This makes sense for shared projects only. Accepts 0 or any user id from the list of project collaborators. If this value is unset or invalid, it will be automatically setup to your uid.
 | commands.responsibleUid | Number      | 	The id of user who is responsible for accomplishing the current task. This makes sense for shared projects only. Accepts any user id from the list of project collaborators or null or an empty string to unset.
 
 ## Todoist.deleteItem

@@ -695,13 +695,8 @@
                         },
                         {
                             "name": "labels",
-                            "type": "List",
-                            "structure": {
-                                "name": "singleLabelId",
-                                "type": "String",
-                                "info": "Single label id."
-                            },
-                            "info": "The tasks labels (a list of label).",
+                            "type": "JSON",
+                            "info": "The tasks labels (a list of label ids such as [2324,2525]).",
                             "required": false
                         },
                         {
@@ -860,13 +855,8 @@
                         },
                         {
                             "name": "labels",
-                            "type": "List",
-                            "structure": {
-                                "name": "singleLabelId",
-                                "type": "String",
-                                "info": "Single label id."
-                            },
-                            "info": "The tasks labels (a list of label).",
+                            "type": "JSON",
+                            "info": "The tasks labels (a list of label ids such as [2324,2525]).",
                             "required": false
                         },
                         {
