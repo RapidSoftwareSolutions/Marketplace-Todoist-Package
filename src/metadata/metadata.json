@@ -378,6 +378,12 @@
                             "required": false
                         },
                         {
+                            "name":"itemOrder",
+                            "type":"Number",
+                            "info":"Project’s order in the project list (a number, where the smallest value should place the project at the top).",
+                            "required":false
+                        },
+                        {
                             "name": "collapsed",
                             "type": "Select",
                             "options": [
