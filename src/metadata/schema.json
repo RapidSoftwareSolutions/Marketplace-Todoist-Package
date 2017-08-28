@@ -1860,12 +1860,7 @@
             },
             {
               "name":"uidsToNotify",
-              "type":"List",
-              "structure":{
-                "name":"userId",
-                "type":"Number",
-                "info":"Single user id."
-              },
+              "type":"JSON",
               "info":"A list of user ids to notify.",
               "required":false
             }

@@ -309,7 +309,7 @@ Add a note.Is only available for Todoist Premium.
 | commands.itemId| String      | The item which the note is part of (a unique number or temp id).
 | commands.content| String     | The content of the note (a string value).
 | commands.fileAttachment| JSON      | A file attached to the note (see more details about attachments above, and learn how to upload a file in the [Uploads section](https://developer.todoist.com/sync/v7/#uploads)).
-| commands.uidsToNotify| List    | A list of user ids to notify.
+| commands.uidsToNotify| JSON    | A list of user ids to notify.
 
 ## Todoist.createProjectNote
 Add a project note.Is only available for Todoist Premium.
