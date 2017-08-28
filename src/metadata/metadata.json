@@ -19,102 +19,94 @@
             "clientSecret"
         ]
     },
-    "events": [
-        {
-            "name": "webhookEvent",
-            "description": "The Todoist Webhooks API allows applications to receive real-time notification (in the form of HTTP POST payload) on the subscribed user events. Notice that once you have a webhook setup, you will start receiving webhook events from all your app users immediately.",
-            "payload": {
-                "event_name": "item:added",
+    "events": [{
+        "name": "webhookEvent",
+        "description": "The Todoist Webhooks API allows applications to receive real-time notification (in the form of HTTP POST payload) on the subscribed user events. Notice that once you have a webhook setup, you will start receiving webhook events from all your app users immediately.",
+        "payload": {
+            "event_name": "item:added",
+            "user_id": 1234,
+            "event_data": {
+                "day_order": -1,
+                "assigned_by_uid": 1855589,
+                "is_archived": 0,
+                "labels": [],
+                "sync_id": null,
+                "in_history": 0,
+                "has_notifications": 0,
+                "indent": 1,
+                "checked": 0,
+                "date_added": "Fri 26 Sep 2014 08:25:05 +0000",
+                "id": 33511505,
+                "content": "Task1",
                 "user_id": 1234,
-                "event_data": {
-                    "day_order": -1,
-                    "assigned_by_uid": 1855589,
-                    "is_archived": 0,
-                    "labels": [],
-                    "sync_id": null,
-                    "in_history": 0,
-                    "has_notifications": 0,
-                    "indent": 1,
-                    "checked": 0,
-                    "date_added": "Fri 26 Sep 2014 08:25:05 +0000",
-                    "id": 33511505,
-                    "content": "Task1",
-                    "user_id": 1234,
-                    "due_date_utc": null,
-                    "children": null,
-                    "priority": 1,
-                    "item_order": 1,
-                    "is_deleted": 0,
-                    "responsible_uid": null,
-                    "project_id": 128501470,
-                    "collapsed": 0,
-                    "date_string": ""
-                }
-            },
-            "steps": [
-                "Before you can start receiving webhook event notifications, you must first have your webhook configured at the Todoist App Management Console."
-            ],
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication",
-                    "required": false
-                }
-            ]
-        }
-    ],
-    "blocks": [
-        {
-            "name": "getAccessToken",
-            "description": "Exchanging authorization codes for access token.",
-            "args": [
-                {
-                    "name": "clientId",
-                    "type": "credentials",
-                    "info": "The unique Client ID of the Todoist application that you registered.",
-                    "required": true
-                },
-                {
-                    "name": "clientSecret",
-                    "type": "credentials",
-                    "info": "The unique Client Secret of the Todoist application that you registered.",
-                    "required": true
-                },
-                {
-                    "name": "code",
-                    "type": "String",
-                    "info": "The unique string code that you obtained in the authorization request.",
-                    "required": true
-                },
-                {
-                    "name": "redirectUri",
-                    "type": "String",
-                    "info": "The URL to which to send the response to this request.",
-                    "required": true
-                }
-            ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
-                {
-                    "name": "success",
-                    "info": "Success"
-                }
-            ]
+                "due_date_utc": null,
+                "children": null,
+                "priority": 1,
+                "item_order": 1,
+                "is_deleted": 0,
+                "responsible_uid": null,
+                "project_id": 128501470,
+                "collapsed": 0,
+                "date_string": ""
+            }
         },
+        "steps": [
+            "Before you can start receiving webhook event notifications, you must first have your webhook configured at the Todoist App Management Console."
+        ],
+        "args": [{
+            "name": "accessToken",
+            "type": "String",
+            "info": "Access token obtained from the OAuth authentication",
+            "required": false
+        }]
+    }],
+    "blocks": [{
+        "name": "getAccessToken",
+        "description": "Exchanging authorization codes for access token.",
+        "args": [{
+            "name": "clientId",
+            "type": "credentials",
+            "info": "The unique Client ID of the Todoist application that you registered.",
+            "required": true
+        },
+            {
+                "name": "clientSecret",
+                "type": "credentials",
+                "info": "The unique Client Secret of the Todoist application that you registered.",
+                "required": true
+            },
+            {
+                "name": "code",
+                "type": "String",
+                "info": "The unique string code that you obtained in the authorization request.",
+                "required": true
+            },
+            {
+                "name": "redirectUri",
+                "type": "String",
+                "info": "The URL to which to send the response to this request.",
+                "required": true
+            }
+        ],
+        "callbacks": [{
+            "name": "error",
+            "info": "Error"
+        },
+            {
+                "name": "success",
+                "info": "Success"
+            }
+        ]
+    },
         {
             "name": "revokeAccessToken",
             "description": "Access tokens obtained via OAuth could be revoke.",
-            "args": [
-                {
-                    "name": "clientId",
-                    "type": "credentials",
-                    "info": "The unique Client ID of the Todoist application that you registered.",
-                    "required": true
-                },
+            "args": [{
+                "name": "clientId",
+                "type": "credentials",
+                "info": "The unique Client ID of the Todoist application that you registered.",
+                "required": true
+            },
                 {
                     "name": "clientSecret",
                     "type": "credentials",
@@ -128,11 +120,10 @@
                     "required": true
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -142,13 +133,12 @@
         {
             "name": "exchangeApiToken",
             "description": "Tokens obtained via the old email\/password authentication method could be migrated to the new OAuth access token.",
-            "args": [
-                {
-                    "name": "clientId",
-                    "type": "credentials",
-                    "info": "The unique Client ID of the Todoist application that you registered.",
-                    "required": true
-                },
+            "args": [{
+                "name": "clientId",
+                "type": "credentials",
+                "info": "The unique Client ID of the Todoist application that you registered.",
+                "required": true
+            },
                 {
                     "name": "clientSecret",
                     "type": "credentials",
@@ -180,11 +170,10 @@
                     "required": true
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -194,13 +183,12 @@
         {
             "name": "crossOriginResourceSharing",
             "description": "All API endpoints not related to the 3 OAuth steps support Cross Origin Resource Sharing (CORS) for requests from any origin.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication",
+                "required": true
+            },
                 {
                     "name": "origin",
                     "type": "String",
@@ -208,11 +196,10 @@
                     "required": true
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -222,13 +209,12 @@
         {
             "name": "readResources",
             "description": "Tokens obtained via the old email\/password authentication method could be migrated to the new OAuth access token.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "syncToken",
                     "type": "String",
@@ -261,11 +247,10 @@
                     "required": true
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -275,25 +260,23 @@
         {
             "name": "createProject",
             "description": "Create project.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "tempId",
-                            "type": "String",
-                            "info": "The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "tempId",
+                        "type": "String",
+                        "info": "The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "uuid",
                             "vendorName": "uuid",
@@ -334,11 +317,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -348,25 +330,23 @@
         {
             "name": "updateProject",
             "description": "Update an existing project.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "id",
-                            "type": "String",
-                            "info": "The id of the project (could be temp id).",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "id",
+                        "type": "String",
+                        "info": "The id of the project (could be temp id).",
+                        "required": true
+                    },
                         {
                             "name": "uuid",
                             "type": "String",
@@ -410,11 +390,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -424,13 +403,12 @@
         {
             "name": "deleteProject",
             "description": "Delete an existing project.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "ids",
                     "type": "List",
@@ -449,11 +427,10 @@
                     "required": true
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -463,13 +440,12 @@
         {
             "name": "archiveProject",
             "description": "Archive project and its children.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "ids",
                     "type": "List",
@@ -488,11 +464,10 @@
                     "required": true
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -502,13 +477,12 @@
         {
             "name": "unarchiveProject",
             "description": "Unarchive project and its children.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "ids",
                     "type": "List",
@@ -527,11 +501,10 @@
                     "required": true
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -541,13 +514,12 @@
         {
             "name": "updateMultipleOrdersAndIndents",
             "description": "Update the orders and indents of multiple projects at once.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "uuid",
                     "type": "String",
@@ -559,13 +531,12 @@
                     "type": "Array",
                     "info": "A dictionary array, with a project id as key and a two elements list as value: project_id: [item_order, indent]",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "projectId",
-                            "type": "String",
-                            "info": "The id of the project (could be temp id).",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "projectId",
+                        "type": "String",
+                        "info": "The id of the project (could be temp id).",
+                        "required": true
+                    },
                         {
                             "name": "itemOrder",
                             "type": "Number",
@@ -587,11 +558,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -601,25 +571,23 @@
         {
             "name": "createItem",
             "description": "Add a new task to a project.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "tempId",
-                            "type": "String",
-                            "info": "The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "tempId",
+                        "type": "String",
+                        "info": "The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "uuid",
                             "vendorName": "uuid",
@@ -755,11 +723,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -769,26 +736,24 @@
         {
             "name": "updateItem",
             "description": "Updates an item for the user related to the API credentials.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "id",
                             "type": "String",
@@ -913,11 +878,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -927,13 +891,12 @@
         {
             "name": "deleteItem",
             "description": "Delete an existing task.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "uuid",
                     "type": "String",
@@ -952,11 +915,10 @@
                     "required": true
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -966,25 +928,23 @@
         {
             "name": "moveItem",
             "description": "Move a task from one project to another project.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "projectItems",
                             "type": "JSON",
@@ -1000,11 +960,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -1014,13 +973,12 @@
         {
             "name": "completeItems",
             "description": "Complete tasks and optionally move them to history. See also itemClose for a simplified version of the command.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "uuid",
                     "type": "String",
@@ -1049,11 +1007,10 @@
                     "required": false
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -1063,13 +1020,12 @@
         {
             "name": "uncompleteItems",
             "description": "Uncomplete tasks and move them to the active projects.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "uuid",
                     "type": "String",
@@ -1094,11 +1050,10 @@
                     "required": false
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -1108,26 +1063,24 @@
         {
             "name": "completeRecurringTask",
             "description": "Complete a recurring task, and the reason why this is a special case is because we need to mark a recurring completion (and using itemUpdate won\u2019t do this). See also item_close for a simplified version of the command.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "newDateUtc",
                             "type": "DatePicker",
@@ -1159,11 +1112,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -1173,26 +1125,24 @@
         {
             "name": "closeItem",
             "description": "A simplified version of itemComplete . The command does exactly what official clients do when you close a task: regular task is completed and moved to history, subtask is checked (marked as done, but not moved to history), recurring task is moved forward (due date is updated).",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "id",
                             "type": "String",
@@ -1202,11 +1152,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -1216,25 +1165,23 @@
         {
             "name": "updateDayOrders",
             "description": "Update the day orders of multiple items at once.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "itemId",
-                            "type": "String",
-                            "info": "The item which the note is part of (a unique number or temp id).",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "itemId",
+                        "type": "String",
+                        "info": "The item which the note is part of (a unique number or temp id).",
+                        "required": true
+                    },
                         {
                             "name": "dayOrder",
                             "type": "String",
@@ -1244,11 +1191,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -1258,25 +1204,23 @@
         {
             "name": "createLabel",
             "description": "Create a label.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "tempId",
-                            "type": "String",
-                            "info": "The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "tempId",
+                        "type": "String",
+                        "info": "The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "uuid",
                             "vendorName": "uuid",
@@ -1305,11 +1249,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -1319,26 +1262,24 @@
         {
             "name": "updateLabel",
             "description": "Update a label.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "id",
                             "type": "String",
@@ -1366,11 +1307,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -1380,26 +1320,24 @@
         {
             "name": "deleteLabel",
             "description": "Update a label.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "id",
                             "type": "String",
@@ -1409,11 +1347,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -1423,13 +1360,12 @@
         {
             "name": "updateMultipleOrders",
             "description": "A dictionary, where a label id is the key, and the order its value: labelId : order.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "uuid",
                     "type": "String",
@@ -1441,13 +1377,12 @@
                     "type": "Array",
                     "info": "A dictionary, where a label id is the key, and the order its value: label_id: order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "order",
-                            "type": "Number",
-                            "info": "Order number.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "order",
+                        "type": "Number",
+                        "info": "Order number.",
+                        "required": true
+                    },
                         {
                             "name": "labelId",
                             "type": "String",
@@ -1457,11 +1392,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -1471,26 +1405,24 @@
         {
             "name": "createNote",
             "description": "Add a note.Is only available for Todoist Premium.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "tempId",
                             "type": "String",
@@ -1529,11 +1461,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -1543,26 +1474,24 @@
         {
             "name": "createProjectNote",
             "description": "Add a project note.Is only available for Todoist Premium.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "projectId",
                             "type": "String",
@@ -1584,11 +1513,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -1598,26 +1526,24 @@
         {
             "name": "updateNote",
             "description": "Update a note.Is only available for Todoist Premium.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "id",
                             "type": "String",
@@ -1639,11 +1565,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -1653,26 +1578,24 @@
         {
             "name": "deleteNote",
             "description": "Delete a note.Is only available for Todoist Premium.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "id",
                             "type": "String",
@@ -1682,11 +1605,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -1696,25 +1618,23 @@
         {
             "name": "createFilter",
             "description": "Add a filter.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "tempId",
-                            "type": "String",
-                            "info": "The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "tempId",
+                        "type": "String",
+                        "info": "The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "uuid",
                             "vendorName": "uuid",
@@ -1743,11 +1663,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -1757,26 +1676,24 @@
         {
             "name": "updateFilter",
             "description": "Update a filter.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "id",
                             "type": "String",
@@ -1810,11 +1727,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -1824,26 +1740,24 @@
         {
             "name": "deleteFilter",
             "description": "Delete a filter.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "id",
                             "type": "String",
@@ -1853,11 +1767,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -1867,25 +1780,23 @@
         {
             "name": "createReminder",
             "description": "Add a new reminder to the user account related to the API credentials.Is only available for Todoist Premium.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "tempId",
-                            "type": "String",
-                            "info": "The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "tempId",
+                        "type": "String",
+                        "info": "The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "uuid",
                             "vendorName": "uuid",
@@ -1994,11 +1905,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -2008,26 +1918,24 @@
         {
             "name": "updateReminder",
             "description": "Update a reminder from the user account related to the API credentials.Is only available for Todoist Premium.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "id",
                             "type": "String",
@@ -2124,11 +2032,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -2138,25 +2045,23 @@
         {
             "name": "deleteReminder",
             "description": "Delete a reminder from the user account related to the API credentials.Is only available for Todoist Premium.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "id",
                             "type": "String",
@@ -2166,11 +2071,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -2180,34 +2084,30 @@
         {
             "name": "clearLocations",
             "description": "Clears the locations list, which is used for the location reminders.Is only available for Todoist Premium.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        }
-                    ]
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    }]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -2217,19 +2117,16 @@
         {
             "name": "getProductivityStats",
             "description": "Get the user\u2019s productivity stats.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                }
-            ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            }],
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -2239,13 +2136,12 @@
         {
             "name": "getAllCompletedItems",
             "description": "Only available for Todoist Premium users.Get all the user\u2019s completed items (tasks).Is only available for Todoist Premium.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "projectId",
                     "type": "Number",
@@ -2287,11 +2183,10 @@
                     "required": false
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -2301,19 +2196,16 @@
         {
             "name": "getArchivedProjects",
             "description": "Get the user\u2019s archived projects.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                }
-            ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            }],
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -2323,13 +2215,12 @@
         {
             "name": "getItemInfo",
             "description": "This function is used to extract detailed information about the item, including all the notes.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "itemId",
                     "type": "String",
@@ -2347,11 +2238,10 @@
                     "required": false
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -2361,13 +2251,12 @@
         {
             "name": "getProjectInfo",
             "description": "This function is used to extract detailed information about the project, including all the note",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "projectId",
                     "type": "String",
@@ -2385,11 +2274,10 @@
                     "required": false
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -2399,13 +2287,12 @@
         {
             "name": "getProjectData",
             "description": "Get a project\u2019s uncompleted items.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "projectId",
                     "type": "String",
@@ -2413,11 +2300,10 @@
                     "required": true
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -2427,13 +2313,12 @@
         {
             "name": "quickAddTask",
             "description": "Add a new task using the Quick Add Task implementation available in the official clients.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "text",
                     "type": "String",
@@ -2453,11 +2338,10 @@
                     "required": false
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -2467,13 +2351,12 @@
         {
             "name": "registerNewUser",
             "description": "Register a new user.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "email",
                     "type": "String",
@@ -2521,11 +2404,10 @@
                     "required": false
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -2535,25 +2417,23 @@
         {
             "name": "updateUsersProperties",
             "description": "Update user\u2019s properties",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "tempId",
-                            "type": "String",
-                            "info": "The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "tempId",
+                        "type": "String",
+                        "info": "The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "uuid",
                             "vendorName": "uuid",
@@ -2668,11 +2548,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -2682,26 +2561,24 @@
         {
             "name": "updateKarmaGoals",
             "description": "Update the karma goals of the user.Is only available for Todoist Premium.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "dailyGoal",
                             "type": "Number",
@@ -2743,11 +2620,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -2757,13 +2633,12 @@
         {
             "name": "updateNotificationSettings",
             "description": "Update the user\u2019s notification settings.Is only available for Todoist Premium.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "notificationType",
                     "type": "List",
@@ -2816,11 +2691,10 @@
                     "required": true
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -2830,25 +2704,23 @@
         {
             "name": "shareProject",
             "description": "Share a project with another user.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "projectId",
                             "type": "String",
@@ -2864,11 +2736,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -2878,25 +2749,23 @@
         {
             "name": "deleteCollaborator",
             "description": "Share a project with another user.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "projectId",
                             "type": "String",
@@ -2912,11 +2781,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -2926,26 +2794,24 @@
         {
             "name": "acceptInvitation",
             "description": "Accept an invitation to join a shared project.Only available for Todoist Premium users.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "invitationId",
                             "type": "Number",
@@ -2961,11 +2827,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -2975,26 +2840,24 @@
         {
             "name": "rejectInvitation",
             "description": "Reject an invitation to join a shared project.Only available for Todoist Premium users.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "invitationId",
                             "type": "Number",
@@ -3010,11 +2873,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -3024,26 +2886,24 @@
         {
             "name": "deleteInvitation",
             "description": "Delete an invitation to join a shared project.Only available for Todoist Premium users.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "invitationId",
                             "type": "Number",
@@ -3053,11 +2913,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -3067,26 +2926,24 @@
         {
             "name": "setLastKnown",
             "description": "Set the last known notification.Only available for Todoist Premium users.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "id",
                             "type": "Number",
@@ -3096,11 +2953,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -3110,26 +2966,24 @@
         {
             "name": "markAsRead",
             "description": "Mark the notification as read.Only available for Todoist Premium users.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "id",
                             "type": "Number",
@@ -3139,11 +2993,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -3153,34 +3006,30 @@
         {
             "name": "markAllAsRead",
             "description": "Mark all notifications as read.Only available for Todoist Premium users.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        }
-                    ]
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    }]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -3190,26 +3039,24 @@
         {
             "name": "markAsUnread",
             "description": "Mark the notification as unread.Only available for Todoist Premium users.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "Array",
                     "info": "Array of Command object. Each command will be processed in the specified order.",
                     "required": true,
-                    "structure": [
-                        {
-                            "name": "uuid",
-                            "vendorName": "uuid",
-                            "type": "String",
-                            "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
-                            "required": true
-                        },
+                    "structure": [{
+                        "name": "uuid",
+                        "vendorName": "uuid",
+                        "type": "String",
+                        "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+                        "required": true
+                    },
                         {
                             "name": "id",
                             "type": "Number",
@@ -3219,11 +3066,10 @@
                     ]
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -3233,13 +3079,12 @@
         {
             "name": "sendInvitation",
             "description": "This function allows you to send invitation to your business account. Every invitation object has an unique id and secret code.Only available for Todoist Premium users.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "emailList",
                     "type": "List",
@@ -3258,11 +3103,10 @@
                     "required": false
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -3272,13 +3116,12 @@
         {
             "name": "acceptBusinessInvitation",
             "description": "This function allows you to send invitation to your business account. Every invitation object has an unique id and secret code.Only available for Todoist Premium users.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "id",
                     "type": "Number",
@@ -3292,11 +3135,10 @@
                     "required": true
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -3305,14 +3147,13 @@
         },
         {
             "name": "rejectBusinessInvitation",
-            "description": "The invitation is rejected and deleted. Note that the client doesn\u2019t have to provide the user\u2019s token to reject invitation: it\u2019s enough to provide knowledge of invitation secret business account yet.	Only available for Todoist Premium users.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "description": "The invitation is rejected and deleted. Note that the client doesn\u2019t have to provide the user\u2019s token to reject invitation: it\u2019s enough to provide knowledge of invitation secret business account yet.Only available for Todoist Premium users.",
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "invitationId",
                     "type": "Number",
@@ -3326,11 +3167,10 @@
                     "required": true
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -3340,13 +3180,12 @@
         {
             "name": "getActivityLogs",
             "description": "Get activity logs.Is only available for Todoist Premium.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "objectType",
                     "type": "String",
@@ -3414,11 +3253,10 @@
                     "required": false
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -3428,19 +3266,16 @@
         {
             "name": "getBackups",
             "description": "Todoist creates a backup archive of users\u2019 data on a daily basis. Backup archives can also be accessed from the web app (Todoist Settings -> Backups).",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                }
-            ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            }],
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -3450,13 +3285,12 @@
         {
             "name": "createObjectEmail",
             "description": "Creates a new email address for an object.Only available for Todoist Premium users.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "objType",
                     "type": "Select",
@@ -3475,11 +3309,10 @@
                     "required": true
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -3489,13 +3322,12 @@
         {
             "name": "getObjectEmail",
             "description": "Gets an existing email.Only available for Todoist Premium users.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "objType",
                     "type": "Select",
@@ -3514,11 +3346,10 @@
                     "required": true
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -3528,13 +3359,12 @@
         {
             "name": "disableObjectEmail",
             "description": "Disables an email address for an object.Only available for Todoist Premium users.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "objType",
                     "type": "Select",
@@ -3553,11 +3383,10 @@
                     "required": true
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -3567,13 +3396,12 @@
         {
             "name": "getUploadsFiles",
             "description": "Get all user\u2019s uploads.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "limit",
                     "type": "Number",
@@ -3587,11 +3415,10 @@
                     "required": true
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -3601,13 +3428,12 @@
         {
             "name": "deleteExistingUser",
             "description": "Delete an existing user.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "currentPassword",
                     "type": "Number",
@@ -3621,11 +3447,10 @@
                     "required": false
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
@@ -3635,13 +3460,12 @@
         {
             "name": "createMultipleCommand",
             "description": "Create request with multiple command.See more in readme.",
-            "args": [
-                {
-                    "name": "accessToken",
-                    "type": "String",
-                    "info": "Access token obtained from the OAuth authentication.",
-                    "required": true
-                },
+            "args": [{
+                "name": "accessToken",
+                "type": "String",
+                "info": "Access token obtained from the OAuth authentication.",
+                "required": true
+            },
                 {
                     "name": "commands",
                     "type": "JSON",
@@ -3649,11 +3473,10 @@
                     "required": true
                 }
             ],
-            "callbacks": [
-                {
-                    "name": "error",
-                    "info": "Error"
-                },
+            "callbacks": [{
+                "name": "error",
+                "info": "Error"
+            },
                 {
                     "name": "success",
                     "info": "Success"
