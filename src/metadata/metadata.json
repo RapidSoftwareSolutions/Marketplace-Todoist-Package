@@ -2547,7 +2547,7 @@
                         },
                         {
                             "name": "theme",
-                            "type": "String",
+                            "type": "Number",
                             "info": "The currently selected Todoist theme (between 0 and 10).",
                             "required": false
                         }
