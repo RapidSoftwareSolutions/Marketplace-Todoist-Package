@@ -1494,6 +1494,13 @@
           "required":true,
           "structure":[
             {
+              "name": "uuid",
+              "vendorName": "uuid",
+              "type": "String",
+              "info": "You should generate a unique string ID for each command and specify it in the uuid field.See more in readme.",
+              "required": true
+            },
+            {
               "name":"itemId",
               "type":"String",
               "info":"The item which the note is part of (a unique number or temp id).",
