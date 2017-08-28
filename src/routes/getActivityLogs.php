@@ -20,8 +20,7 @@ $app->post('/api/Todoist/getActivityLogs', function ($request, $response) {
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
-    print_R($data);
-    exit();
+
 
     $client = $this->httpClient;
     $query_str = "https://todoist.com/api/v7/activity/get";

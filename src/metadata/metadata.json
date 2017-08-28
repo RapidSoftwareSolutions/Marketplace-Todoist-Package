@@ -2925,7 +2925,7 @@
         },
         {
             "name": "acceptInvitation",
-            "description": "Accept an invitation to join a shared project.",
+            "description": "Accept an invitation to join a shared project.Only available for Todoist Premium users.",
             "args": [
                 {
                     "name": "accessToken",
@@ -2974,7 +2974,7 @@
         },
         {
             "name": "rejectInvitation",
-            "description": "Reject an invitation to join a shared project.",
+            "description": "Reject an invitation to join a shared project.Only available for Todoist Premium users.",
             "args": [
                 {
                     "name": "accessToken",
@@ -3023,7 +3023,7 @@
         },
         {
             "name": "deleteInvitation",
-            "description": "Delete an invitation to join a shared project.",
+            "description": "Delete an invitation to join a shared project.Only available for Todoist Premium users.",
             "args": [
                 {
                     "name": "accessToken",
@@ -3066,7 +3066,7 @@
         },
         {
             "name": "setLastKnown",
-            "description": "Set the last known notification.",
+            "description": "Set the last known notification.Only available for Todoist Premium users.",
             "args": [
                 {
                     "name": "accessToken",
@@ -3109,7 +3109,7 @@
         },
         {
             "name": "markAsRead",
-            "description": "Mark the notification as read.",
+            "description": "Mark the notification as read.Only available for Todoist Premium users.",
             "args": [
                 {
                     "name": "accessToken",
@@ -3152,7 +3152,7 @@
         },
         {
             "name": "markAllAsRead",
-            "description": "Mark all notifications as read.",
+            "description": "Mark all notifications as read.Only available for Todoist Premium users.",
             "args": [
                 {
                     "name": "accessToken",
@@ -3189,7 +3189,7 @@
         },
         {
             "name": "markAsUnread",
-            "description": "Mark the notification as unread.",
+            "description": "Mark the notification as unread.Only available for Todoist Premium users.",
             "args": [
                 {
                     "name": "accessToken",
@@ -3232,7 +3232,7 @@
         },
         {
             "name": "sendInvitation",
-            "description": "This function allows you to send invitation to your business account. Every invitation object has an unique id and secret code.",
+            "description": "This function allows you to send invitation to your business account. Every invitation object has an unique id and secret code.Only available for Todoist Premium users.",
             "args": [
                 {
                     "name": "accessToken",
@@ -3271,7 +3271,7 @@
         },
         {
             "name": "acceptBusinessInvitation",
-            "description": "This function allows you to send invitation to your business account. Every invitation object has an unique id and secret code.",
+            "description": "This function allows you to send invitation to your business account. Every invitation object has an unique id and secret code.Only available for Todoist Premium users.",
             "args": [
                 {
                     "name": "accessToken",
@@ -3305,7 +3305,7 @@
         },
         {
             "name": "rejectBusinessInvitation",
-            "description": "The invitation is rejected and deleted. Note that the client doesn\u2019t have to provide the user\u2019s token to reject invitation: it\u2019s enough to provide knowledge of invitation secret business account yet.",
+            "description": "The invitation is rejected and deleted. Note that the client doesn\u2019t have to provide the user\u2019s token to reject invitation: it\u2019s enough to provide knowledge of invitation secret business account yet.	Only available for Todoist Premium users.",
             "args": [
                 {
                     "name": "accessToken",
@@ -3449,7 +3449,7 @@
         },
         {
             "name": "createObjectEmail",
-            "description": "Creates a new email address for an object.",
+            "description": "Creates a new email address for an object.Only available for Todoist Premium users.",
             "args": [
                 {
                     "name": "accessToken",
@@ -3488,7 +3488,7 @@
         },
         {
             "name": "getObjectEmail",
-            "description": "Gets an existing email.",
+            "description": "Gets an existing email.Only available for Todoist Premium users.",
             "args": [
                 {
                     "name": "accessToken",
@@ -3527,7 +3527,7 @@
         },
         {
             "name": "disableObjectEmail",
-            "description": "Disables an email address for an object.",
+            "description": "Disables an email address for an object.Only available for Todoist Premium users.",
             "args": [
                 {
                     "name": "accessToken",
@@ -3600,7 +3600,7 @@
         },
         {
             "name": "deleteExistingUser",
-            "description": "Delete an existing user",
+            "description": "Delete an existing user.",
             "args": [
                 {
                     "name": "accessToken",
