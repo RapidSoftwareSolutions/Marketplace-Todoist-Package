@@ -1087,7 +1087,7 @@
                             "name": "id",
                             "type": "String",
                             "info": "The id of the item to update (a number or a temp id).",
-                            "required": false
+                            "required": true
                         },
                         {
                             "name": "dateString",
