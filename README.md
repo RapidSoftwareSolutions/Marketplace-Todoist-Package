@@ -538,9 +538,9 @@ Update user’s properties
 | commands.startPage| String     |	The user’s default view on Todoist. The start page can be one of the following: _info_page for the info page, _blank for a blank page, _project_<PROJECT_ID> for project with id <PROJECT_ID>, and <ANY_QUERY> to query after anything.
 | commands.startDay| Number    | 	The first day of the week (between 1 and 7, where 1 is Monday and 7 is Sunday).
 | commands.nextWeek| Number      | Array of Command object. Each command will be processed in the specified order.
-| commands.timeFormat| Select     |The day of the next week, that tasks will be postponed to (between 1 and 7, where 1 is Monday and 7 is Sunday).Options - true,false.
-| commands.dateFormat| Select      | 	Whether to use the DD-MM-YYYY date format (if set to 0), or the MM-DD-YYYY format (if set to 1).Options - MM-DD-YYYY,DD-MM-YYYY.
-| commands.sortOrder| Select     | Whether to show projects in an oldest dates first order (if set to 0, or a oldest dates last order (if set to 1).Options - true,false.
+| commands.timeFormat| Number     |The day of the next week, that tasks will be postponed to (between 1 and 7, where 1 is Monday and 7 is Sunday).
+| commands.dateFormat| Select      | Whether to use the DD-MM-YYYY date format or the MM-DD-YYYY .Options - MM-DD-YYYY,DD-MM-YYYY.
+| commands.sortOrder| Select     | Whether to show projects in an oldest dates first order or oldest dates last order . Options - oldestDatesLast,oldestDatesFirst.
 | commands.defaultReminder| String      | The default reminder for the user. Reminders are only possible for Premium users. The default reminder can be one of the following: email to send reminders by email, mobile to send reminders to mobile devices via SMS, push to send reminders to smart devices using push notifications (one of the Android or iOS official clients must be installed on the client side to receive these notifications), no_default to turn off sending default reminders.
 | commands.autoReminder| Number     | The default time in minutes for the automatic reminders set, whenever a due date has been specified for a task.
 | commands.mobileNumber| String     |	The user’s mobile number (null if not set).
@@ -580,7 +580,6 @@ Share a project with another user.
 |---------|------------|----------
 | accessToken | String| Access token obtained from the OAuth authentication.
 | commands| Array      | Array of Command object. Each command will be processed in the specified order.
-|commands.tempId | String | The temporary resource ID feature allows you to run two or more dependent commands in a single HTTP request. For commands that are related to creation of resources (i.e. createItem, createProject), you can specify an extra tempId as a placeholder for the actual ID of the resource. The other commands in the same sequence could directly refer to tempId if needed.
 |commands.uuid| String | API clients should generate a unique string ID for each command and specify it in the uuid field. The Command UUID will be used for two purposes: 1.Command result mapping: Each command’s result will be stored in the syncStatus field of the response JSON object. The syncStatus object has its key mapped to a command’s uuid and its value containing the result of a command.2.Command idempotency: Todoist will not execute command that has same UUID as the previously executed commands. This will allow clients to safely retry each command without accidentally performing the command twice.
 | commands.projectId| String     | 	The project to be shared.
 | commands.email| String     | 	The user email with whom to share the project.

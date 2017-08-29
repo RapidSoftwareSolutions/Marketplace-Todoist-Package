@@ -2409,7 +2409,7 @@
             },
             {
               "name":"coordinates",
-              "type":"map",
+              "type":"Map",
               "info":"Location coordinates.",
               "required":false
             },
@@ -2549,7 +2549,7 @@
             },
             {
               "name":"coordinates",
-              "type":"map",
+              "type":"Map",
               "info":"Location coordinates.",
               "required":false
             },
@@ -3227,19 +3227,13 @@
               "required":false
             },
             {
-              "name":"timeFormat",
-              "type":"Number",
-              "info":"Whether to use a 24h format such as 13:00 (if set to 0) when displaying time, or a 12h format such as 1:00pm (if set to 1).",
-              "required":false
-            },
-            {
               "name":"dateFormat",
               "type":"Select",
               "options":[
                 "DD-MM-YYYY",
                 "MM-DD-YYYY"
               ],
-              "info":"Whether to use the DD-MM-YYYY date format (if set to 0), or the MM-DD-YYYY format (if set to 1).",
+              "info":"Whether to use the DD-MM-YYYY date format or the MM-DD-YYYY.",
               "required":false
             },
             {
@@ -3249,7 +3243,7 @@
                 "oldestDatesFirst",
                 "oldestDatesLast"
               ],
-              "info":"Whether to show projects in an oldest dates first order (if set to 0, or a oldest dates last order (if set to 1).",
+              "info":"Whether to show projects in an oldest dates first order or oldest dates last order .",
               "required":false
             },
             {
@@ -3266,7 +3260,7 @@
             },
             {
               "name":"mobileNumber",
-              "type":"Number",
+              "type":"String",
               "info":"The default time in minutes for the automatic reminders set, whenever a due date has been specified for a task.",
               "required":false
             },
@@ -3445,8 +3439,7 @@
           "type":"Select",
           "options":[
             "email",
-            "push",
-            "mobile"
+            "push"
           ],
           "info":"The service type, which can take the values: email or push.",
           "required":true
