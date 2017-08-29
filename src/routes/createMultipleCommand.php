@@ -20,6 +20,8 @@ $app->post('/api/Todoist/createMultipleCommand', function ($request, $response) 
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
+    $data['commands'] = json_encode($data['commands']);
+
     $client = $this->httpClient;
     $query_str = "https://todoist.com/api/v7/sync";
 
