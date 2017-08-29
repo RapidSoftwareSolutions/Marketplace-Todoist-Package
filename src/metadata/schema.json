@@ -1389,7 +1389,7 @@
                 "true",
                 "false"
               ],
-              "info":"Whether the task is to be completed (value 1) or uncompleted (value 0), while the default is 1.",
+              "info":"Whether the task is to be completed (true) or uncompleted (false), while the default is true.",
               "required":false
             }
           ]
