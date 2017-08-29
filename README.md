@@ -227,7 +227,7 @@ Complete a recurring task, and the reason why this is a special case is because 
 | commands.id| String      | The id of the item to update (a number or a temp id).
 | commands.newDateUtc| DatePicker      | Note that, when the newDateUtc argument is specified, the date_string is required and has to specified as well, and also, the date_string argument will be parsed as local timestamp, and converted to UTC internally, according to the user’s profile settings.
 | commands.dateString| String      | The date of the task, added in free form text, for example it can be every day @ 10 (or null or an empty string to unset). Look at our reference to see [which formats are supported](https://support.todoist.com/hc/en-us/articles/205325931-Due-Dates-Times).
-| commands.isForward| Select      | Whether the task is to be completed (value 1) or uncompleted (value 0), while the default is 1.Options - true,false.
+| commands.isForward| Select      | Whether the task is to be completed (true) or uncompleted (false), while the default is true.Options - true,false.
 
 ## Todoist.closeItem
 A simplified version of itemComplete . The command does exactly what official clients do when you close a task: regular task is completed and moved to history, subtask is checked (marked as done, but not moved to history), recurring task is moved forward (due date is updated).
