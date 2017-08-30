@@ -54,7 +54,8 @@
         }
       },
       "steps":[
-        "Before you can start receiving webhook event notifications, you must first have your webhook configured at the Todoist App Management Console."
+        "Before you can start receiving webhook event notifications, you must first have your webhook configured at the Todoist App Management Console.",
+        "In webhook section set callback to __WEBHOOK_URL__"
       ],
       "args":[
         {
